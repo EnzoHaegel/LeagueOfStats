@@ -1,0 +1,15 @@
+<p>history works!</p>
+<div class="container">
+    <!-- material input -->
+    <mat-form-field appearance="fill">
+        <mat-label>Enter LOL username</mat-label>
+        <input matInput placeholder="username" required>
+        <mat-icon matSuffix>account_circle</mat-icon>
+        <mat-hint>Enter your username</mat-hint>
+    </mat-form-field>
+    <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+
+    <div class="match-history">
+
+    </div>
+</div>

@@ -1,0 +1,52 @@
+.container {
+  margin: 10px;
+  width: calc(100% - 20px);
+
+  .match-history {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #424242;
+    padding: 5px;
+    display: flex;
+
+    .team {
+        width: 50%;
+        display: flex;
+
+        .player {
+
+            .champions {
+
+                .name {
+                    .player-name {
+
+                    }
+
+                    .champion-name {
+
+                    }
+                }
+
+                .picture {
+                    height: 24px;
+                    width: 24px;
+                }
+            }
+
+            .kda {
+
+            }
+
+            .items {
+                display: flex;
+
+                .item {
+                    height: 16px;
+                    width: 16px;
+                }
+            }
+        }
+    }
+  }
+}
