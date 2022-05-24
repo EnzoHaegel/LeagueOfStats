@@ -38,6 +38,7 @@ export interface IMatchMetadata {
     dataVersion: string;
     matchId: number;
     participants: string[];
+    usernames: string[];
 }
 
 export interface IMatch {

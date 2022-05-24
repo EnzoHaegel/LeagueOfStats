@@ -30,6 +30,67 @@
                 <img *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item4)" alt="">
                 <img *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item5)" alt="">
             </div>
+
+            <div class="all-players">
+                <div class="team">
+                    <div *ngFor="let index of [0, 1, 2, 3, 4]" class="player">
+                        <div class="champion">
+                            <img class="champion-icon" [src]="match.info.participants[index].ddragonChampionIcon" alt="">
+                            <div class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ match.info.participants[index].championName }}</div>
+                        </div>
+                        <span class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
+                        <div class="item-block">
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item0 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item0)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item1 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item1)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item2 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item2)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item3 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item3)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item4 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item4)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item5 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item5)" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="team">
+                    <div *ngFor="let index of [5, 6, 7, 8, 9]" class="player">
+                        <div class="item-block">
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item0 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item0)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item1 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item1)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item2 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item2)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item3 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item3)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item4 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item4)" alt="">
+                            </div>
+                            <div class="item-icon">
+                                <img *ngIf="match.info.participants[index].item5 > 0" class="item-picture" [src]="riotPicturesService.getItemIcon(match.info.participants[index].item5)" alt="">
+                            </div>
+                        </div>
+                        <span class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
+                        <div class="champion" [ngStyle]="{'float': 'left'}">
+                            <span class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ match.info.participants[index].championName }}</span>
+                            <img class="champion-icon" [src]="match.info.participants[index].ddragonChampionIcon" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

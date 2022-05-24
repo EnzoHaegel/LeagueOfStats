@@ -50,6 +50,7 @@ export class MapperRiotApiService {
       dataVersion: metadata.dataVersion,
       matchId: metadata.matchId,
       participants: metadata.participants,
+      usernames: [],
     }
   }
 

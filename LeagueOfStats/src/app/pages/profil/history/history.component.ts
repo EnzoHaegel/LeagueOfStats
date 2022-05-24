@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { IMatch, IParticipant } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
@@ -21,11 +22,21 @@ export class HistoryComponent implements OnInit {
 
   constructor(
     private apiRiotService: ApiRiotService,
-    public riotPicturesService: RiotPicturesService
+    public riotPicturesService: RiotPicturesService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    if (this.inputUsername) {
+    // get username from query params
+    this.route.queryParams.subscribe(params => {
+      if (params['puuid']) {
+        this.matches = [];
+        this.getMatchesId(params['puuid'], 0, 10);
+        this.user_puuid = params['puuid'];
+      }
+    });
+
+    if (this.username.value === '' && this.inputUsername) {
       this.username.setValue(this.inputUsername);
       this.getSummonerByName();
     } else if (localStorage.getItem("username")) {
@@ -54,7 +65,7 @@ export class HistoryComponent implements OnInit {
     localStorage.setItem("username", this.username.value);
 
     this.apiRiotService.getSummonerByName(this.username.value).subscribe(data => {
-      this.getMatchesId(data.puuid, 0, 1);
+      this.getMatchesId(data.puuid, 0, 10);
       this.user_puuid = data.puuid;
     });
   }
