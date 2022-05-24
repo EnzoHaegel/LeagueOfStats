@@ -1,15 +1,38 @@
-<p>history works!</p>
 <div class="container">
     <!-- material input -->
-    <mat-form-field appearance="fill">
-        <mat-label>Enter LOL username</mat-label>
-        <input matInput placeholder="username" required>
-        <mat-icon matSuffix>account_circle</mat-icon>
-        <mat-hint>Enter your username</mat-hint>
-    </mat-form-field>
-    <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+    <form>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter LOL username</mat-label>
+            <input matInput placeholder="Username" [formControl]="username" #input>
+            <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
 
-    <div class="match-history">
-
+    <div *ngFor="let match of matches" class="match-history" [ngClass]="getStatsOfPlayer(match).win ? 'win' : 'loss'">
+        <div class="type-of-game">
+            {{ secondesToMinutes(match.info.gameDuration) + ' ' + match.info.gameMode + ' ' + getGameTypeName(match.info.gameMode, match.info.gameType) }}
+        </div>
+        <div class="infos">
+            <div class="champion">
+                <img class="champion-icon" [src]="getStatsOfPlayer(match).ddragonChampionIcon" alt="">
+                <span class="champion-name">{{ getStatsOfPlayer(match).championName }}</span>
+            </div>
+            <div class="kda-container">
+                <span class="kda-text">{{ getStatsOfPlayer(match).kills }} / {{ getStatsOfPlayer(match).deaths }} / {{ getStatsOfPlayer(match).assists }}</span>
+                <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
+            </div>
+            <div class="items">
+                <img *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item0)" alt="">
+                <img *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item1)" alt="">
+                <img *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item2)" alt="">
+                <img *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item3)" alt="">
+                <img *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item4)" alt="">
+                <img *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item5)" alt="">
+            </div>
+        </div>
     </div>
+
+    <!-- Load More Button -->
+    <button *ngIf="matches.length > 0" mat-raised-button color="primary" (click)="loadMore()">Load More</button>
 </div>

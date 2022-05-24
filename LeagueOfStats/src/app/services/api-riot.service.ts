@@ -8,10 +8,13 @@ import { ILeague, ISummoner } from '../models/IRiot';
   providedIn: 'root'
 })
 export class ApiRiotService {
-
-  public api_key = "api_key=RGAPI-e2d9f7f3-93d5-489a-b18a-d791a8d6be8a";
+  public BASE_URL = 'http://localhost:3000/api/';
 
   public headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
   });
 
   constructor(
@@ -20,35 +23,34 @@ export class ApiRiotService {
   ) { }
 
   public getSummonerByName(name: string): Observable<ISummoner> {
-    let url = 'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' + name + '?' + this.api_key;
-
-    return this.http.get(url, { headers: this.headers }).pipe(
+    return this.http.get(this.BASE_URL + 'summoner/' + name, { headers: this.headers }).pipe(
       map(data => this.mapperRiotApiService.mapSummoner(data))
     );
   }
 
   public getLeagueBySummonerId(id: string): Observable<ILeague[]> {
-    let url = 'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/' + id + '?' + this.api_key;
-
-    return this.http.get(url, { headers: this.headers }).pipe(
+    return this.http.get(this.BASE_URL + 'league/' + id, { headers: this.headers }).pipe(
       map((data: any) => data.map((league: any) => this.mapperRiotApiService.mapLeague(league)))
     );
   }
 
   public getMatchsIdBySummonerPuuid(puuid: string, start: number, count: number): Observable<string[]> {
-    let url = 'https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/' + puuid + '/ids';
-    url += "?start=" + start + "&count=" + count + "&" + this.api_key;
+    let options = "?start=" + start + "&count=" + count;
 
-    return this.http.get(url, { headers: this.headers }).pipe(
+    return this.http.get(this.BASE_URL + 'matches/' + puuid + options, { headers: this.headers }).pipe(
       map((data: any) => data)
     );
   }
 
   public getMatchsById(id: string): Observable<any> {
-    let url = 'https://europe.api.riotgames.com/lol/match/v5/matches/' + id + '?' + this.api_key;
-
-    return this.http.get(url, { headers: this.headers }).pipe(
+    return this.http.get(this.BASE_URL + 'match/' + id, { headers: this.headers }).pipe(
       map((data: any) => this.mapperRiotApiService.mapMatch(data))
+    );
+  }
+
+  public getChampionNameById(id: number): Observable<string> {
+    return this.http.get(this.BASE_URL + 'championName/' + id, { headers: this.headers }).pipe(
+      map((data: any) => data)
     );
   }
 }

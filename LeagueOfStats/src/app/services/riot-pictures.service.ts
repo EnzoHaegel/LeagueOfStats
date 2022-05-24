@@ -15,7 +15,7 @@ export class RiotPicturesService {
     return `https://ddragon.leagueoflegends.com/cdn/12.6.1/img/champion/${championName}.png`;
   }
 
-  public getItemIcon(itemId: string): string {
+  public getItemIcon(itemId: number): string {
     return `https://ddragon.leagueoflegends.com/cdn/12.6.1/img/item/${itemId}.png`;
   }
 

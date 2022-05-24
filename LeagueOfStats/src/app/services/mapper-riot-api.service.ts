@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IInfo, ILeague, IMatch, IMatchMetadata, IObjective, IObjectives, IParticipant, IPerk, IPerkSelection, ISummoner, ITeam, ITeamBan } from '../models/IRiot';
+import { IInfo, ILeague, IMatch, IMatchMetadata, IObjective, IObjectives, IParticipant, IPerks, IPerkSelection, IStatPerks, IStyles, ISummoner, ITeam, ITeamBan } from '../models/IRiot';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +71,8 @@ export class MapperRiotApiService {
 
   public mapParticipant(participant: any): IParticipant {
     return {
+      ddragonChampionIcon: undefined,
+      championName: undefined,
       assists: participant.assists,
       baronKills: participant.baronKills,
       championId: participant.championId,
@@ -141,20 +143,27 @@ export class MapperRiotApiService {
     };
   }
 
-  public mapPerk(perks: any): IPerk {
+  public mapPerks(perks: any): IPerks {
     return {
-      description: perks.description,
-      selections: this.mapPerksSelections(perks.selections),
-      style: perks.style,
+      statPerks: this.mapStatPerks(perks.statPerks),
+      styles: perks.styles.map((style: any) => this.mapStyles(style)),
+    }
+  }
+
+  public mapStatPerks(statPerks: any): IStatPerks {
+    return {
+      defense: statPerks.defense,
+      flex: statPerks.flex,
+      offense: statPerks.offense,
+    }
+  }
+
+  public mapStyles(styles: any): IStyles {
+    return {
+      description: styles.description,
+      selections: styles.selections.map((selection: any) => this.mapPerkSelection(selection)),
+      style: styles.style,
     };
-  }
-
-  public mapPerks(perks: any): IPerk[] {
-    return perks.map((perk: any) => this.mapPerk(perk));
-  }
-
-  public mapPerksSelections(selections: any): IPerkSelection[] {
-    return selections.map((selection: any) => this.mapPerkSelection(selection));
   }
 
   public mapPerkSelection(selection: any): IPerkSelection {

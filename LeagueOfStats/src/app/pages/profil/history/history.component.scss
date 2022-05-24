@@ -1,52 +1,89 @@
 .container {
-  margin: 10px;
-  width: calc(100% - 20px);
+    margin: 10px;
+    width: calc(100% - 20px);
 
-  .match-history {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background-color: #424242;
-    padding: 5px;
-    display: flex;
+    .match-history {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #424242;
+        padding: 5px;
 
-    .team {
-        width: 50%;
-        display: flex;
+        .type-of-game {
+            width: 100%;
+            font-size: 12px;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
 
-        .player {
+        .infos {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            overflow: auto;
 
-            .champions {
+            .champion {
+                display: flex;
+                flex-direction: column;
+                margin-right: 10px;
 
-                .name {
-                    .player-name {
-
-                    }
-
-                    .champion-name {
-
-                    }
+                .champion-icon {
+                    width: 32px;
+                    height: 32px;
+                    margin-left: 5px;
                 }
 
-                .picture {
-                    height: 24px;
-                    width: 24px;
+                .champion-name {
+                    font-size: 12px;
+                    color: #fff;
+                    margin-left: 5px;
                 }
             }
 
-            .kda {
+            .kda-container {
+                height: 100%;
+                display: block;
+                margin-left: 5px;
+                
+                .kda-text {
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 14px;
+                    display: flex;
+                    color: #fff;
+                }
 
+                .kda-ratio {
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 13px;
+                    display: flex;
+                    color: #fff;
+                }
             }
 
             .items {
                 display: flex;
+                height: 100%;
+                margin-left: 5px;
+                overflow: auto;
 
-                .item {
-                    height: 16px;
-                    width: 16px;
+                .item-icon {
+                    width: 24px;
+                    height: 24px;
+                    border: 1px solid #424242;
+                    margin: 1px;
                 }
             }
         }
     }
-  }
+}
+
+.win {
+    background: -webkit-linear-gradient(left, rgba(0, 230, 118, 0.2), rgba(0, 230, 118, 0.2));
+}
+
+.loss {
+    background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.2), rgba(255, 82, 82, 0.2));
 }
