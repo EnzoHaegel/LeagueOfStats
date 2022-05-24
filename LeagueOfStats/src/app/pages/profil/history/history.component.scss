@@ -1,6 +1,7 @@
 .container {
     margin: 10px;
     width: calc(100% - 20px);
+    justify-content: space-between;
 
     .match-history {
         margin-top: 10px;
@@ -8,6 +9,7 @@
         border-radius: 5px;
         background-color: #424242;
         padding: 5px;
+        width: 900px;
 
         .type-of-game {
             width: 100%;
@@ -24,27 +26,32 @@
             overflow: auto;
 
             .champion {
+                justify-content: center;
+                align-items: center;
                 display: flex;
                 flex-direction: column;
                 margin-right: 10px;
 
                 .champion-icon {
-                    width: 32px;
-                    height: 32px;
+                    width: 48px;
+                    height: 48px;
                     margin-left: 5px;
+                    border-radius: 100%;
                 }
 
                 .champion-name {
-                    font-size: 12px;
+                    font-size: 15px;
                     color: #fff;
                     margin-left: 5px;
                 }
             }
 
             .kda-container {
-                height: 100%;
-                display: block;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
                 margin-left: 5px;
+                position: relative;
                 
                 .kda-text {
                     justify-content: center;
@@ -65,11 +72,13 @@
 
             .items {
                 display: flex;
-                height: 100%;
                 margin-left: 5px;
                 overflow: auto;
+                justify-content: center;
+                align-items: center;
 
                 .item-icon {
+                    justify-content: center;
                     width: 24px;
                     height: 24px;
                     border: 1px solid #424242;
@@ -124,12 +133,12 @@
                                 display: flex;
                                 border: 1px solid #424242;
                                 background-color: #696969;
-                                width: 12px;
-                                height: 12px;
+                                width: 16px;
+                                height: 16px;
 
                                 .item-picture {
-                                    width: 12px;
-                                    height: 12px;
+                                    width: 16px;
+                                    height: 16px;
                                 }
                             }
                         }
@@ -146,4 +155,11 @@
 
 .loss {
     background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.2), rgba(255, 82, 82, 0.2));
+}
+
+.divider-vertical {
+    width: 1px;
+    height: 100%;
+    background-color: #424242;
+    margin: 0 5px;
 }
