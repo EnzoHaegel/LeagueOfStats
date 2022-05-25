@@ -1,4 +1,83 @@
 .container {
     margin: 10px;
     width: calc(100% - 20px);
+    display: block;
+
+    .search {
+        width: calc(80%);
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+
+        .form-group {
+            width: calc(80%);
+            margin: auto;
+            padding: 10px;
+        }
+
+        .button {
+            padding: 20px, 0;
+            height: 50px;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            display: flex;
+        }
+    }
+
+    .infos {
+        display: flex;
+
+        .profil {
+            width: calc(25% - 20px);
+            margin: 10px;
+            border-radius: 5px;
+            background-color: #424242;
+            padding: 5px;
+
+            .profil-infos {
+                .player-infos {
+                    .player-icon {
+
+                    }
+
+                    .player-name {
+
+                    }
+                }
+
+                .rank-player {
+                    .rank-icon {
+
+                    }
+                    .rank-icon {
+
+                    }
+                }
+            }
+        }
+
+        .history {
+            width: calc(75% - 10px);
+            margin: 5px;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .container {
+        .infos {
+            flex-direction: column;
+            .profil {
+                width: calc(100% - 10px);
+                margin: 5px;
+            }
+            .history {
+                width: calc(100% - 10px);
+                margin: 5px;
+            }
+        }
+    }
 }

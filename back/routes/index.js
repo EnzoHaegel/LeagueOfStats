@@ -116,4 +116,33 @@ router.get('/allChampionName', checkLocalhost, (req, res) => {
     });
 });
 
+// get rank player info depend of username
+router.get('/rank/:summonerName', checkLocalhost, (req, res) => {
+    const summonerName = req.params.summonerName;
+    // get encryptedSummonerId from summonerName
+    const url = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
+    https.get(url, (response) => {
+        let body = '';
+        response.on('data', (chunk) => {
+            body += chunk;
+        });
+        response.on('end', () => {
+            const parsed = JSON.parse(body);
+            const encryptedSummonerId = parsed.id;
+            // get rank player info depend of encryptedSummonerId
+            const url = `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${encryptedSummonerId}?api_key=${API_KEY}`;
+            https.get(url, (response) => {
+                let body = '';
+                response.on('data', (chunk) => {
+                    body += chunk;
+                });
+                response.on('end', () => {
+                    const parsed = JSON.parse(body);
+                    res.status(200).json(parsed);
+                });
+            });
+        });
+    });
+});
+
 module.exports = router;

@@ -1,15 +1,16 @@
 .container {
-    margin: 10px;
-    width: calc(100% - 20px);
+    margin: 5px;
+    width: calc(100% - 10px);
     justify-content: space-between;
 
     .match-history {
-        margin-top: 10px;
-        margin-bottom: 10px;
         border-radius: 5px;
         background-color: #424242;
         padding: 5px;
-        width: 900px;
+        max-width: calc(min(1000px, 100%));
+        margin: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
 
         .type-of-game {
             width: 100%;
@@ -100,6 +101,9 @@
                         .champion {
                             display: flex;
                             flex-direction: row;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
 
                             .champion-icon {
                                 width: 16px;
@@ -112,6 +116,9 @@
                                 font-size: 12px;
                                 color: #fff;
                                 cursor: pointer;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                white-space: nowrap;
 
                                 &:hover {
                                     text-decoration: underline;
@@ -119,26 +126,34 @@
                             }
                         }
 
-                        .kda {
-                            margin-right: 3px;
-                            font-size: 12px;
-                            color: #fff;
-                        }
 
-                        .item-block {
-                            margin-right: 3px;
+                        .kda-items {
                             display: flex;
 
-                            .item-icon {
-                                display: flex;
-                                border: 1px solid #424242;
-                                background-color: #696969;
-                                width: 16px;
-                                height: 16px;
+                            .kda {
+                                // Make items don't overflow
+                                display: inline-block;
+                                margin-left: 3px;
+                                margin-right: 3px;
+                                font-size: 12px;
+                                color: #fff;
+                            }
 
-                                .item-picture {
+                            .item-block {
+                                margin-right: 3px;
+                                display: flex;
+
+                                .item-icon {
+                                    display: flex;
+                                    border: 1px solid #424242;
+                                    background-color: #696969;
                                     width: 16px;
                                     height: 16px;
+
+                                    .item-picture {
+                                        width: 16px;
+                                        height: 16px;
+                                    }
                                 }
                             }
                         }
@@ -162,4 +177,30 @@
     height: 100%;
     background-color: #424242;
     margin: 0 5px;
+}
+
+// when width is lower than 1062px, hide items
+@media screen and (max-width: 1200px) {
+    .container {
+        .match-history {
+            .infos {
+                .all-players {
+                    .team {
+                        .player {
+                            .kda-items {
+                                .item-block {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .load {
+        width: 100%;
+        margin: auto;
+    }
 }

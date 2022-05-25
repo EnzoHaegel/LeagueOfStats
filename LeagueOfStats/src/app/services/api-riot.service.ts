@@ -34,6 +34,12 @@ export class ApiRiotService {
     );
   }
 
+  public getLeagueBySummonerName(name: string): Observable<ILeague[]> {
+    return this.http.get(this.BASE_URL + 'rank/' + name, { headers: this.headers }).pipe(
+      map((data: any) => data.map((league: any) => this.mapperRiotApiService.mapLeague(league)))
+    );
+  }
+
   public getMatchsIdBySummonerPuuid(puuid: string, start: number, count: number): Observable<string[]> {
     let options = "?start=" + start + "&count=" + count;
 

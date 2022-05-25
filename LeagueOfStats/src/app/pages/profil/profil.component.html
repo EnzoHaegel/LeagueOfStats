@@ -1,1 +1,21 @@
-<app-history></app-history>
+<div class="container">
+    <form class="search">
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Enter LOL username</mat-label>
+            <input matInput placeholder="Username" [formControl]="username" #input>
+            <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+        <div class="button">
+            <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </form>
+
+    <div class="infos">
+        <div class="profil">
+            
+        </div>
+        <div class="history">
+            <app-history [inputUsername]="username.value"></app-history>
+        </div>
+    </div>
+</div>
