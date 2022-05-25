@@ -30,6 +30,22 @@ router.get('/summoner/:summonerName', checkLocalhost, (req, res) => {
     });
 });
 
+// get summoner by summoner puuid
+router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, (req, res) => {
+    const summonerPuuid = req.params.summonerPuuid;
+    const url = `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${summonerPuuid}?api_key=${API_KEY}`;
+    https.get(url, (response) => {
+        let body = '';
+        response.on('data', (chunk) => {
+            body += chunk;
+        });
+        response.on('end', () => {
+            const parsed = JSON.parse(body);
+            res.status(200).json(parsed);
+        });
+    });
+});
+
 // https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/
 router.get('/league/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;

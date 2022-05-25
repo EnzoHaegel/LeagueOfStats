@@ -59,4 +59,10 @@ export class ApiRiotService {
       map((data: any) => data)
     );
   }
+
+  public getSummonerByPuuid(puuid: string): Observable<ISummoner> {
+    return this.http.get(this.BASE_URL + 'summoner/' + puuid, { headers: this.headers }).pipe(
+      map(data => this.mapperRiotApiService.mapSummoner(data))
+    );
+  } 
 }
