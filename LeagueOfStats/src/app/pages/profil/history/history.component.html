@@ -101,5 +101,7 @@
     </div>
 
     <!-- Load More Button -->
-    <button class="load" *ngIf="matches.length > 0" mat-raised-button color="primary" (click)="loadMore()">Load More</button>
+    <div class="load">
+        <button class="button" *ngIf="matches.length > 0" mat-raised-button color="primary" (click)="loadMore()">Load More</button>
+    </div>
 </div>
