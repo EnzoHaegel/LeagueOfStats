@@ -11,50 +11,62 @@
     </form>
 
     <div class="infos">
-        <div *ngIf="summoner" class="profil">
-            <div class="profil-infos">
-                <div class="player-infos">
-                    <img class="player-icon" [src]="getIconById()" alt="">
-                    <div class="player-name">
-                        <span [ngStyle]="{'font-size': '16px'}">{{ 'Lvl: ' + summoner?.summonerLevel }}</span>
-                        <span>{{ summoner?.name }}</span>
+        <div class="left-panel">
+            <div *ngIf="summoner" class="profil">
+                <div class="profil-infos">
+                    <div class="player-infos">
+                        <img class="player-icon" [src]="getIconById()" alt="">
+                        <div class="player-name">
+                            <span [ngStyle]="{'font-size': '16px'}">{{ 'Lvl: ' + summoner?.summonerLevel }}</span>
+                            <span>{{ summoner?.name }}</span>
+                        </div>
                     </div>
-                </div>
-                <div *ngIf="getRankedLeague('RANKED_SOLO_5x5') != undefined" class="rank-player">
-                    <mat-divider></mat-divider>
-                    <span class="league-name">Ranked Solo/Duo</span>
-                    <div class="rank-infos">
-                        <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + '.png'" alt="" class="rank-icon">
-                        <div class="rank-name">
-                            <div class="winrate">
-                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.wins + '/' + getRankedLeague('RANKED_SOLO_5x5')?.losses }}</span>
-                                <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_SOLO_5x5')) + '%' }}</span>
+                    <div *ngIf="getRankedLeague('RANKED_SOLO_5x5') != undefined" class="rank-player">
+                        <mat-divider></mat-divider>
+                        <span class="league-name">Ranked Solo/Duo</span>
+                        <div class="rank-infos">
+                            <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + '.png'" alt="" class="rank-icon">
+                            <div class="rank-name">
+                                <div class="winrate">
+                                    <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.wins + '/' + getRankedLeague('RANKED_SOLO_5x5')?.losses }}</span>
+                                    <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_SOLO_5x5')) + '%' }}</span>
+                                </div>
+                                <div>
+                                    <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + ' ' }}</span>
+                                    <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.rank + ' ' }}</span>
+                                    <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.leaguePoints + 'LP' }}</span>
+                                </div>
                             </div>
-                            <div>
-                                <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + ' ' }}</span>
-                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.rank + ' ' }}</span>
-                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.leaguePoints + 'LP' }}</span>
+                        </div>
+                    </div>
+                    <div *ngIf="getRankedLeague('RANKED_FLEX_SR') != undefined" class="rank-player">
+                        <mat-divider></mat-divider>
+                        <span class="league-name">Ranked Flex</span>
+                        <div class="rank-infos">
+                            <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + '.png'" alt="" class="rank-icon">
+                            <div class="rank-name">
+                                <div class="winrate">
+                                    <span>{{ getRankedLeague('RANKED_FLEX_SR')?.wins + '/' + getRankedLeague('RANKED_FLEX_SR')?.losses }}</span>
+                                    <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_FLEX_SR')) + '%' }}</span>
+                                </div>
+                                <div>
+                                    <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + ' ' }}</span>
+                                    <span>{{ getRankedLeague('RANKED_FLEX_SR')?.rank + ' ' }}</span>
+                                    <span>{{ getRankedLeague('RANKED_FLEX_SR')?.leaguePoints + 'LP' }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="getRankedLeague('RANKED_FLEX_SR') != undefined" class="rank-player">
-                    <mat-divider></mat-divider>
-                    <span class="league-name">Ranked Flex</span>
-                    <div class="rank-infos">
-                        <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + '.png'" alt="" class="rank-icon">
-                        <div class="rank-name">
-                            <div class="winrate">
-                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.wins + '/' + getRankedLeague('RANKED_FLEX_SR')?.losses }}</span>
-                                <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_FLEX_SR')) + '%' }}</span>
-                            </div>
-                            <div>
-                                <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + ' ' }}</span>
-                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.rank + ' ' }}</span>
-                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.leaguePoints + 'LP' }}</span>
-                            </div>
-                        </div>
+            </div>
+
+            <div class="masteries">
+                <div *ngFor="let index of [0, 1, 2, 3, 4]">
+                    <div *ngIf="masteries && masteries[index]" class="mastery">
+                        <img [src]="masteries[index].ddragonIcon" alt="">
+                        <span>{{ masteries[index].championPoints }}</span>
                     </div>
+                    <mat-divider></mat-divider>
                 </div>
             </div>
         </div>

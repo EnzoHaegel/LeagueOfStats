@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { MapperRiotApiService } from './mapper-riot-api.service';
-import { ILeague, ISummoner } from '../models/IRiot';
+import { ILeague, IMasteries, ISummoner } from '../models/IRiot';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +64,11 @@ export class ApiRiotService {
     return this.http.get(this.BASE_URL + 'summoner/' + puuid, { headers: this.headers }).pipe(
       map(data => this.mapperRiotApiService.mapSummoner(data))
     );
-  } 
+  }
+
+  public getMasteriesBySummonerId(id: string): Observable<IMasteries[]> {
+    return this.http.get(this.BASE_URL + 'masteries/' + id, { headers: this.headers }).pipe(
+      map((data: any) => data.map((mastery: any) => this.mapperRiotApiService.mapMasteries(mastery)))
+    );
+  }
 }

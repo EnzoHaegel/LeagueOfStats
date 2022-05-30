@@ -23,6 +23,12 @@
                     <img *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item3)" alt="">
                     <img *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item4)" alt="">
                     <img *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="riotPicturesService.getItemIcon(getStatsOfPlayer(match).item5)" alt="">
+                    <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
+                    <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
+                    <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
+                    <span *ngIf="getStatsOfPlayer(match).item3 == 0" class="item-icon"></span>
+                    <span *ngIf="getStatsOfPlayer(match).item4 == 0" class="item-icon"></span>
+                    <span *ngIf="getStatsOfPlayer(match).item5 == 0" class="item-icon"></span>
                 </div>
 
                 <div class="all-players">

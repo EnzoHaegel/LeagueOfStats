@@ -102,6 +102,7 @@
                         width: 24px;
                         height: 24px;
                         border: 1px solid #424242;
+                        background-color: #696969;
                         margin: 1px;
                     }
                 }
@@ -182,7 +183,12 @@
             }
         }
     }
+    .load {
+        width: calc(100% - 200px);
+        margin: 5px 100px;
+    }
 }
+
 
 // .win {
 //     background: -webkit-linear-gradient(left, rgba(0, 230, 118, 0.15), rgba(0, 230, 118, 0.15));
@@ -235,13 +241,13 @@
                 }
             }
         }
-    }
-
-    .load {
-        width: 100%;
-        margin: auto;
+        .load {
+            width: 100%;
+            margin: auto;
+        }
     }
 }
+
 
 @media screen and (max-width: 650px) {
     .container {
@@ -264,6 +270,7 @@
         }
     }
 }
+
 @media screen and (max-width: 550px) {
     .container {
         .match-history {
@@ -277,4 +284,3 @@
         }
     }
 }
-

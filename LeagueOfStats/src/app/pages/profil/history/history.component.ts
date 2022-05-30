@@ -73,7 +73,6 @@ export class HistoryComponent implements OnInit {
   public onSearch(): void {
     this.matches = [];
     this.getSummonerByName();
-    console.log(this.matches);
   }
 
   public getStatsOfPlayer(match: IMatch): IParticipant {

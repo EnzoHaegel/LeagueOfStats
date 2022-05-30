@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IInfo, ILeague, IMatch, IMatchMetadata, IObjective, IObjectives, IParticipant, IPerks, IPerkSelection, IStatPerks, IStyles, ISummoner, ITeam, ITeamBan } from '../models/IRiot';
+import { IInfo, ILeague, IMasteries, IMatch, IMatchMetadata, IObjective, IObjectives, IParticipant, IPerks, IPerkSelection, IStatPerks, IStyles, ISummoner, ITeam, ITeamBan } from '../models/IRiot';
 
 @Injectable({
   providedIn: 'root'
@@ -207,6 +207,21 @@ export class MapperRiotApiService {
     return {
       championId: ban.championId,
       pickTurn: ban.pickTurn,
+    };
+  }
+
+  public mapMasteries(masteries: any): IMasteries {
+    return {
+      championId: masteries.championId,
+      championLevel: masteries.championLevel,
+      championPoints: masteries.championPoints,
+      lastPlayTime: masteries.lastPlayTime,
+      championPointsSinceLastLevel: masteries.championPointsSinceLastLevel,
+      championPointsUntilNextLevel: masteries.championPointsUntilNextLevel,
+      chestGranted: masteries.chestGranted,
+      tokensEarned: masteries.tokensEarned,
+      summonerId: masteries.summonerId,
+      ddragonIcon: undefined,
     };
   }
 }

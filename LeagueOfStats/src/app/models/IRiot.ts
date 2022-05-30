@@ -192,3 +192,16 @@ export interface IPlayer {
     summonerId: string;
     accountId: string;
 }
+
+export interface IMasteries {
+    championId: number;
+    championLevel: number;
+    championPoints: number;
+    lastPlayTime: number;
+    championPointsSinceLastLevel: number;
+    championPointsUntilNextLevel: number;
+    chestGranted: boolean;
+    tokensEarned: number;
+    summonerId: string;
+    ddragonIcon: string | undefined;
+}

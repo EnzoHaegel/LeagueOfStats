@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISummoner, ILeague } from 'src/app/models/IRiot';
+import { ISummoner, ILeague, IMasteries } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 
@@ -18,6 +18,8 @@ export class ProfilComponent implements OnInit {
   public summoner: ISummoner | undefined;
 
   public league: ILeague[] | undefined;
+
+  public masteries: IMasteries[] | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,6 +59,7 @@ export class ProfilComponent implements OnInit {
     this.apiRiotService.getSummonerByName(username).subscribe(data => {
       this.summoner = data;
       this.getLeagueById();
+      this.getMasteriesById();
     });
   }
 
@@ -74,7 +77,6 @@ export class ProfilComponent implements OnInit {
     }
     this.apiRiotService.getLeagueBySummonerId(this.summoner?.id).subscribe(data => {
       this.league = data;
-      console.log(data);
     });
   }
 
@@ -96,5 +98,38 @@ export class ProfilComponent implements OnInit {
       return 0;
     }
     return Math.round((league.wins / (league.wins + league.losses)) * 100);
+  }
+
+  public getMasteriesById() {
+    if (!this.summoner) {
+      this.masteries = [];
+      return;
+    }
+    this.apiRiotService.getMasteriesBySummonerId(this.summoner?.id).subscribe(data => {
+      this.masteries = data;
+      this.fillMasteryIcon();
+    });
+  }
+
+  public getChampionIconById(championId: number): any {
+    this.apiRiotService.getChampionNameById(championId).subscribe(data => {
+      return this.riotPicturesService.getChampionIcon(data);
+    });
+  }
+
+  public fillMasteryIcon() {
+    if (!this.masteries) {
+      return;
+    }
+    // for 5 first masteries
+    for (let i = 0; i < 5; i++) {
+      this.getChampionIconById(this.masteries[i].championId).subscribe(
+        (data: string | undefined) => {
+          if (this.masteries && this.masteries[i]) {
+          this.masteries[i].ddragonIcon = data;
+          }
+        }
+      );
+    }
   }
 }
