@@ -89,9 +89,17 @@
                         }
 
                         .rank-name {
-                            font-size: 15px;
+                            margin-top: auto;
+                            margin-bottom: 5px;
+                            font-size: 14px;
                             color: #fff;
                             margin-left: 5px;
+                            display: flex;
+                            flex-direction: column;
+
+                            .winrate {
+                                font-size: 12px;
+                            }
                         }
                     }
                 }

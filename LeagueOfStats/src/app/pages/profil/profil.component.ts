@@ -90,4 +90,11 @@ export class ProfilComponent implements OnInit {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
+
+  public calcWinrate(league: ILeague | undefined): number {
+    if (!league) {
+      return 0;
+    }
+    return Math.round((league.wins / (league.wins + league.losses)) * 100);
+  }
 }

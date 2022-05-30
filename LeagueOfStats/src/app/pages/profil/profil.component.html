@@ -25,6 +25,16 @@
                     <span class="league-name">Ranked Solo/Duo</span>
                     <div class="rank-infos">
                         <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + '.png'" alt="" class="rank-icon">
+                        <div class="rank-name">
+                            <div class="winrate">
+                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.wins + '/' + getRankedLeague('RANKED_SOLO_5x5')?.losses }}</span>
+                                <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_SOLO_5x5')) + '%' }}</span>
+                            </div>
+                            <div>
+                                <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + ' ' }}</span>
+                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.leaguePoints + 'LP' }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
@@ -32,6 +42,16 @@
                     <span class="league-name">Ranked Flex</span>
                     <div class="rank-infos">
                         <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + '.png'" alt="" class="rank-icon">
+                        <div class="rank-name">
+                            <div class="winrate">
+                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.wins + '/' + getRankedLeague('RANKED_FLEX_SR')?.losses }}</span>
+                                <span>{{ ' ' + calcWinrate(getRankedLeague('RANKED_FLEX_SR')) + '%' }}</span>
+                            </div>
+                            <div>
+                                <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + ' ' }}</span>
+                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.leaguePoints + 'LP' }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
