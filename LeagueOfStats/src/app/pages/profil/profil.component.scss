@@ -76,6 +76,7 @@
                         font-size: 15px;
                         color: #fff;
                         margin-left: 5px;
+                        margin-top: 10px;
                     }
 
                     .rank-infos {
@@ -118,15 +119,22 @@
         .infos {
             flex-direction: column;
             .profil {
-                width: calc(100% - 30px);
+                width: calc(100% - 25px);
                 margin: 10px;
-                margin-right: 20px;
+                margin-right: 15px;
                 position: relative;
             }
             .history {
-                width: calc(100% - 10px);
-                margin: 5px;
+                width: calc(100% - 5px);
+                margin-left: 5px;
             }
         }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        margin: 0;
+        width: calc(100% - 10px);
     }
 }

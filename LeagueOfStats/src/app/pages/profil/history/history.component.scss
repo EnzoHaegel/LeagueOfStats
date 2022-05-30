@@ -264,3 +264,17 @@
         }
     }
 }
+@media screen and (max-width: 550px) {
+    .container {
+        .match-history {
+            .game-content {
+                .infos {
+                    .items {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+

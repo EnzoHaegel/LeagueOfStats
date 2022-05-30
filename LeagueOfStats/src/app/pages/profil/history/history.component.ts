@@ -31,7 +31,7 @@ export class HistoryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['puuid']) {
         this.matches = [];
-        this.getMatchesId(params['puuid'], 0, 10);
+        this.getMatchesId(params['puuid'], 0, 5);
         this.user_puuid = params['puuid'];
       }
     });
@@ -65,7 +65,7 @@ export class HistoryComponent implements OnInit {
     localStorage.setItem("username", this.username.value);
 
     this.apiRiotService.getSummonerByName(this.username.value).subscribe(data => {
-      this.getMatchesId(data.puuid, 0, 10);
+      this.getMatchesId(data.puuid, 0, 5);
       this.user_puuid = data.puuid;
     });
   }
@@ -96,7 +96,7 @@ export class HistoryComponent implements OnInit {
   }
 
   public loadMore(): void {
-    this.getMatchesId(this.user_puuid, this.matches.length, 10);
+    this.getMatchesId(this.user_puuid, this.matches.length, 5);
   }
 
   public secondesToMinutes(secondes: number): string {

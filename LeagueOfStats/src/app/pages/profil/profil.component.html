@@ -11,7 +11,7 @@
     </form>
 
     <div class="infos">
-        <div class="profil">
+        <div *ngIf="summoner" class="profil">
             <div class="profil-infos">
                 <div class="player-infos">
                     <img class="player-icon" [src]="getIconById()" alt="">
@@ -20,8 +20,8 @@
                         <span>{{ summoner?.name }}</span>
                     </div>
                 </div>
-                <mat-divider></mat-divider>
                 <div *ngIf="getRankedLeague('RANKED_SOLO_5x5') != undefined" class="rank-player">
+                    <mat-divider></mat-divider>
                     <span class="league-name">Ranked Solo/Duo</span>
                     <div class="rank-infos">
                         <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + '.png'" alt="" class="rank-icon">
@@ -32,13 +32,14 @@
                             </div>
                             <div>
                                 <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + ' ' }}</span>
+                                <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.rank + ' ' }}</span>
                                 <span>{{ getRankedLeague('RANKED_SOLO_5x5')?.leaguePoints + 'LP' }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <mat-divider></mat-divider>
                 <div *ngIf="getRankedLeague('RANKED_FLEX_SR') != undefined" class="rank-player">
+                    <mat-divider></mat-divider>
                     <span class="league-name">Ranked Flex</span>
                     <div class="rank-infos">
                         <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + '.png'" alt="" class="rank-icon">
@@ -49,6 +50,7 @@
                             </div>
                             <div>
                                 <span>{{ lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + ' ' }}</span>
+                                <span>{{ getRankedLeague('RANKED_FLEX_SR')?.rank + ' ' }}</span>
                                 <span>{{ getRankedLeague('RANKED_FLEX_SR')?.leaguePoints + 'LP' }}</span>
                             </div>
                         </div>
