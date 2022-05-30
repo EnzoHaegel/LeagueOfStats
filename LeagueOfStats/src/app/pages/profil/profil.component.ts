@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ISummoner, ILeague, IMasteries } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
+import { ChampionsService } from 'src/app/services/champions.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class ProfilComponent implements OnInit {
     private router: Router,
     private riotPicturesService: RiotPicturesService,
     private apiRiotService: ApiRiotService,
+    private championsService: ChampionsService,
   ) { }
 
   ngOnInit(): void {
@@ -112,9 +114,7 @@ export class ProfilComponent implements OnInit {
   }
 
   public getChampionIconById(championId: number): any {
-    this.apiRiotService.getChampionNameById(championId).subscribe(data => {
-      return this.riotPicturesService.getChampionIcon(data);
-    });
+    return 'assets/champion/' + this.championsService.getChampionInternalNameById(championId) + '.png';
   }
 
   public fillMasteryIcon() {
@@ -122,14 +122,5 @@ export class ProfilComponent implements OnInit {
       return;
     }
     // for 5 first masteries
-    for (let i = 0; i < 5; i++) {
-      this.getChampionIconById(this.masteries[i].championId).subscribe(
-        (data: string | undefined) => {
-          if (this.masteries && this.masteries[i]) {
-          this.masteries[i].ddragonIcon = data;
-          }
-        }
-      );
-    }
   }
 }

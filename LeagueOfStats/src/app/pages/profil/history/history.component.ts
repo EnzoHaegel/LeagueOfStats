@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IMatch, IParticipant } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
+import { ChampionsService } from 'src/app/services/champions.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 
 @Component({
@@ -17,13 +18,13 @@ export class HistoryComponent implements OnInit {
 
   public user_puuid: string = "";
 
-  // username form
   public username = new FormControl('');
 
   constructor(
     private apiRiotService: ApiRiotService,
     public riotPicturesService: RiotPicturesService,
     private route: ActivatedRoute,
+    public championsService: ChampionsService,
   ) { }
 
   ngOnInit(): void {
@@ -54,9 +55,6 @@ export class HistoryComponent implements OnInit {
   public getMatches(id: string): void {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
-      this.matches[this.matches.length - 1].info.participants.map(participant => {
-        this.fillChampionIconByParticipant(participant);
-      });
     });
   }
 
@@ -87,11 +85,8 @@ export class HistoryComponent implements OnInit {
     return match.info.participants[player_number];
   }
 
-  public fillChampionIconByParticipant(participant: IParticipant): void {
-    this.apiRiotService.getChampionNameById(participant.championId).subscribe(data => {
-      participant.ddragonChampionIcon = this.riotPicturesService.getChampionIcon(data);
-      participant.championName = data;
-    });
+  public getChampionIconById(championId: number): any {
+    return 'assets/champion/' + this.championsService.getChampionInternalNameById(championId) + '.png';
   }
 
   public loadMore(): void {

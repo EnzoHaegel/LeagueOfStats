@@ -9,8 +9,8 @@
             </div>
             <div class="infos">
                 <div class="champion">
-                    <img class="champion-icon" [src]="getStatsOfPlayer(match).ddragonChampionIcon" alt="">
-                    <span class="champion-name">{{ getStatsOfPlayer(match).championName }}</span>
+                    <img class="champion-icon" [src]="getChampionIconById(getStatsOfPlayer(match).championId)" alt="">
+                    <span class="champion-name">{{ championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) }}</span>
                 </div>
                 <div class="kda-container">
                     <span class="kda-text">{{ getStatsOfPlayer(match).kills }} / {{ getStatsOfPlayer(match).deaths }} / {{ getStatsOfPlayer(match).assists }}</span>
@@ -35,8 +35,8 @@
                     <div class="team">
                         <div *ngFor="let index of [0, 1, 2, 3, 4]" class="player">
                             <div class="champion">
-                                <img class="champion-icon" [src]="match.info.participants[index].ddragonChampionIcon" alt="">
-                                <div class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ match.info.participants[index].championName }}</div>
+                                <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                <div class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ championsService.getChampionRealNameById(match.info.participants[index].championId) }}</div>
                             </div>
                             <div class="kda-items">
                                 <span class="kda" [ngStyle]="{'margin-right': '0'}">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
@@ -90,8 +90,8 @@
                                 <span [ngStyle]="{'margin-left': '0'}" class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
                             </div>
                             <div class="champion">
-                                <span class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ match.info.participants[index].championName }}</span>
-                                <img class="champion-icon" [src]="match.info.participants[index].ddragonChampionIcon" alt="">
+                                <span class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">{{ championsService.getChampionRealNameById(match.info.participants[index].championId) }}</span>
+                                <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
                             </div>
                         </div>
                     </div>
