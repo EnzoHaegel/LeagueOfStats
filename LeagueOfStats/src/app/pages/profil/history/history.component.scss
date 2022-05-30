@@ -6,153 +6,173 @@
     .match-history {
         border-radius: 5px;
         background-color: #424242;
-        padding: 5px;
         max-width: calc(min(1000px, 100%));
         margin: auto;
         margin-top: 5px;
         margin-bottom: 5px;
+        display: flex;
 
-        .type-of-game {
-            width: 100%;
-            font-size: 12px;
-            color: #fff;
-            padding: 5px;
-            border-radius: 5px;
+        .color-secondary {
+            width: 10px;
+            min-height: 100%;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            margin-right: 5px;
         }
 
-        .infos {
-            display: flex;
-            width: 100%;
+        .game-content {
             justify-content: space-between;
-            overflow: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 100%;
 
-            .champion {
-                justify-content: center;
-                align-items: center;
+            .type-of-game {
+                width: 100%;
+                font-size: 15px;
+                color: #fff;
+                padding: 5px;
+                border-radius: 5px;
                 display: flex;
-                flex-direction: column;
-                margin-right: 10px;
 
-                .champion-icon {
-                    width: 48px;
-                    height: 48px;
-                    margin-left: 5px;
-                    border-radius: 100%;
-                }
-
-                .champion-name {
-                    font-size: 15px;
-                    color: #fff;
-                    margin-left: 5px;
+                .vic-los {
+                    margin-right: 10px;
                 }
             }
 
-            .kda-container {
+            .infos {
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-left: 5px;
-                position: relative;
-                
-                .kda-text {
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 14px;
-                    display: flex;
-                    color: #fff;
-                }
-
-                .kda-ratio {
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 13px;
-                    display: flex;
-                    color: #fff;
-                }
-            }
-
-            .items {
-                display: flex;
-                margin-left: 5px;
+                width: 100%;
+                justify-content: space-between;
                 overflow: auto;
-                justify-content: center;
-                align-items: center;
 
-                .item-icon {
+                .champion {
                     justify-content: center;
-                    width: 24px;
-                    height: 24px;
-                    border: 1px solid #424242;
-                    margin: 1px;
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    margin-right: 10px;
+
+                    .champion-icon {
+                        width: 48px;
+                        height: 48px;
+                        margin-left: 5px;
+                        border-radius: 100%;
+                    }
+
+                    .champion-name {
+                        font-size: 15px;
+                        color: #fff;
+                        margin-left: 5px;
+                    }
                 }
-            }
 
-            .all-players {
-                display: flex;
-
-                .team {
-                    display: block;
-
-                    .player {
+                .kda-container {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin-left: 5px;
+                    position: relative;
+                    
+                    .kda-text {
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 14px;
                         display: flex;
+                        color: #fff;
+                    }
+
+                    .kda-ratio {
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 13px;
+                        display: flex;
+                        color: #fff;
+                    }
+                }
+
+                .items {
+                    display: flex;
+                    margin-left: 5px;
+                    overflow: auto;
+                    justify-content: center;
+                    align-items: center;
+
+                    .item-icon {
+                        justify-content: center;
+                        width: 24px;
+                        height: 24px;
+                        border: 1px solid #424242;
                         margin: 1px;
-                        justify-content: space-between;
+                    }
+                }
 
-                        .champion {
+                .all-players {
+                    display: flex;
+
+                    .team {
+                        display: block;
+
+                        .player {
                             display: flex;
-                            flex-direction: row;
-                            text-overflow: ellipsis;
-                            overflow: hidden;
-                            white-space: nowrap;
+                            margin: 1px;
+                            justify-content: space-between;
 
-                            .champion-icon {
-                                width: 16px;
-                                height: 16px;
-                                margin-right: 3px;
-                            }
-
-                            .player-name {
-                                margin-right: 3px;
-                                font-size: 12px;
-                                color: #fff;
-                                cursor: pointer;
+                            .champion {
+                                display: flex;
+                                flex-direction: row;
                                 text-overflow: ellipsis;
                                 overflow: hidden;
                                 white-space: nowrap;
 
-                                &:hover {
-                                    text-decoration: underline;
-                                }
-                            }
-                        }
-
-
-                        .kda-items {
-                            display: flex;
-
-                            .kda {
-                                // Make items don't overflow
-                                display: inline-block;
-                                margin-left: 3px;
-                                margin-right: 3px;
-                                font-size: 12px;
-                                color: #fff;
-                            }
-
-                            .item-block {
-                                margin-right: 3px;
-                                display: flex;
-
-                                .item-icon {
-                                    display: flex;
-                                    border: 1px solid #424242;
-                                    background-color: #696969;
+                                .champion-icon {
                                     width: 16px;
                                     height: 16px;
+                                    margin-right: 3px;
+                                }
 
-                                    .item-picture {
+                                .player-name {
+                                    margin-right: 3px;
+                                    font-size: 12px;
+                                    color: #fff;
+                                    cursor: pointer;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+
+
+                            .kda-items {
+                                display: flex;
+
+                                .kda {
+                                    // Make items don't overflow
+                                    display: inline-block;
+                                    margin-left: 3px;
+                                    margin-right: 3px;
+                                    font-size: 12px;
+                                    color: #fff;
+                                }
+
+                                .item-block {
+                                    margin-right: 3px;
+                                    display: flex;
+
+                                    .item-icon {
+                                        display: flex;
+                                        border: 1px solid #424242;
+                                        background-color: #696969;
                                         width: 16px;
                                         height: 16px;
+
+                                        .item-picture {
+                                            width: 16px;
+                                            height: 16px;
+                                        }
                                     }
                                 }
                             }
@@ -164,12 +184,28 @@
     }
 }
 
+// .win {
+//     background: -webkit-linear-gradient(left, rgba(0, 230, 118, 0.15), rgba(0, 230, 118, 0.15));
+// }
+
+// .win-secondary {
+//     background: -webkit-linear-gradient(left, rgba(0, 230, 118, 0.5), rgba(0, 230, 118, 0.8));
+// }
+
 .win {
-    background: -webkit-linear-gradient(left, rgba(0, 230, 118, 0.2), rgba(0, 230, 118, 0.2));
+    background: -webkit-linear-gradient(left, rgba(0, 174, 255, 0.15), rgba(0, 174, 255, 0.15));
+}
+
+.win-secondary {
+    background: -webkit-linear-gradient(left, rgba(0, 174, 255, 0.5), rgba(0, 174, 255, 0.8));
 }
 
 .loss {
-    background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.2), rgba(255, 82, 82, 0.2));
+    background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.15), rgba(255, 82, 82, 0.15));
+}
+
+.loss-secondary {
+    background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.5), rgba(255, 82, 82, 0.8));
 }
 
 .divider-vertical {
@@ -180,16 +216,18 @@
 }
 
 // when width is lower than 1062px, hide items
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1210px) {
     .container {
         .match-history {
-            .infos {
-                .all-players {
-                    .team {
-                        .player {
-                            .kda-items {
-                                .item-block {
-                                    display: none;
+            .game-content {
+                .infos {
+                    .all-players {
+                        .team {
+                            .player {
+                                .kda-items {
+                                    .item-block {
+                                        display: none;
+                                    }
                                 }
                             }
                         }
@@ -202,5 +240,27 @@
     .load {
         width: 100%;
         margin: auto;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .container {
+        .match-history {
+            .game-content {
+                .infos {
+                    .all-players {
+                        .team {
+                            .player {
+                                .kda-items {
+                                    .kda {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

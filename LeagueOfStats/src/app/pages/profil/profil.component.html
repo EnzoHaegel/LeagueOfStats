@@ -12,7 +12,29 @@
 
     <div class="infos">
         <div class="profil">
-            
+            <div class="profil-infos">
+                <div class="player-infos">
+                    <img class="player-icon" [src]="getIconById()" alt="">
+                    <div class="player-name">
+                        <span [ngStyle]="{'font-size': '16px'}">{{ 'Lvl: ' + summoner?.summonerLevel }}</span>
+                        <span>{{ summoner?.name }}</span>
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div *ngIf="getRankedLeague('RANKED_SOLO_5x5') != undefined" class="rank-player">
+                    <span class="league-name">Ranked Solo/Duo</span>
+                    <div class="rank-infos">
+                        <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_SOLO_5x5')?.tier || '') + '.png'" alt="" class="rank-icon">
+                    </div>
+                </div>
+                <mat-divider></mat-divider>
+                <div *ngIf="getRankedLeague('RANKED_FLEX_SR') != undefined" class="rank-player">
+                    <span class="league-name">Ranked Flex</span>
+                    <div class="rank-infos">
+                        <img [src]="'assets/Rank-Emblem/Emblem_' + lowerCaseAllNotFirstLetter(getRankedLeague('RANKED_FLEX_SR')?.tier || '') + '.png'" alt="" class="rank-icon">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="history">
             <app-history [inputUsername]="username.value"></app-history>

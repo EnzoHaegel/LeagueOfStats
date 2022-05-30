@@ -7,7 +7,7 @@ export class RiotPicturesService {
 
   constructor() { }
 
-  public getSummonerIcon(iconId: string): string {
+  public getSummonerIcon(iconId: number): string {
     return `https://ddragon.leagueoflegends.com/cdn/12.6.1/img/profileicon/${iconId}.png`;
   }
 

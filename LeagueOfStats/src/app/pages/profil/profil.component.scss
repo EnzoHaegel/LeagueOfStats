@@ -36,24 +36,63 @@
             border-radius: 5px;
             background-color: #424242;
             padding: 5px;
+            height: fit-content;
+            position: sticky;
+            top: 10px;
+            z-index: 1;
 
             .profil-infos {
-                .player-infos {
-                    .player-icon {
 
+                .player-infos {
+                    margin: 5px;
+                    display: flex;
+                    margin-bottom: 10px;
+
+                    .player-icon {
+                        width: 75px;
+                        height: 75px;
+                        border-radius: 100%;
+                        margin-left: 5px;
+                        border: 3px solid #696969;
                     }
 
                     .player-name {
-
+                        font-size: 18px;
+                        color: #fff;
+                        margin-left: 5px;
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: auto;
+                        margin-bottom: 3px;
                     }
                 }
 
                 .rank-player {
-                    .rank-icon {
+                    margin-top: 10px;
+                    display: flex;
+                    flex-direction: column;
 
+                    .league-name {
+                        font-size: 15px;
+                        color: #fff;
+                        margin-left: 5px;
                     }
-                    .rank-icon {
 
+                    .rank-infos {
+                        display: flex;
+                        flex-direction: row;
+
+                        .rank-icon {
+                            margin-left: 10px;
+                            width: 75px;
+                            height: 75px;
+                        }
+
+                        .rank-name {
+                            font-size: 15px;
+                            color: #fff;
+                            margin-left: 5px;
+                        }
                     }
                 }
             }
@@ -71,8 +110,10 @@
         .infos {
             flex-direction: column;
             .profil {
-                width: calc(100% - 10px);
-                margin: 5px;
+                width: calc(100% - 30px);
+                margin: 10px;
+                margin-right: 20px;
+                position: relative;
             }
             .history {
                 width: calc(100% - 10px);
