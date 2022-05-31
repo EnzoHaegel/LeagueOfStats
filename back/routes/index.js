@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-ffe05d45-5ab7-4286-97a1-fddd40dbc6d8"
+const API_KEY = "RGAPI-59498973-b1c9-4340-b826-1ebd641e7420"
 
 // a function that log requests
 function checkLocalhost (req, res, next) {
@@ -70,7 +70,6 @@ router.get('/matches/:summonerId', checkLocalhost, (req, res) => {
     const count = req.query.count;
     let url = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerId}/ids?api_key=${API_KEY}`;
     url += `&start=${start}&count=${count}`;
-    console.log(url);
     https.get(url, (response) => {
         let body = '';
         response.on('data', (chunk) => {
