@@ -60,13 +60,15 @@
                 </div>
             </div>
 
-            <div class="masteries">
+            <div *ngIf="this.masteries" class="masteries">
                 <div *ngFor="let index of [0, 1, 2, 3, 4]">
                     <div *ngIf="masteries && masteries[index]" class="mastery">
-                        <img [src]="masteries[index].ddragonIcon" alt="">
+                        <img class="champion-icon" [src]="getChampionIconById(masteries[index].championId)" alt="">
                         <span>{{ masteries[index].championPoints }}</span>
                     </div>
-                    <mat-divider></mat-divider>
+                    <div *ngIf="masteries && masteries[index]">
+                        <mat-divider></mat-divider>
+                    </div>
                 </div>
             </div>
         </div>

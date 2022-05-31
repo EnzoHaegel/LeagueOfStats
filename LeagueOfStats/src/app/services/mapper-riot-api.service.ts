@@ -221,7 +221,6 @@ export class MapperRiotApiService {
       chestGranted: masteries.chestGranted,
       tokensEarned: masteries.tokensEarned,
       summonerId: masteries.summonerId,
-      ddragonIcon: undefined,
     };
   }
 }

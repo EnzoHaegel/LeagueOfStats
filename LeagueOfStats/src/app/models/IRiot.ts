@@ -203,5 +203,4 @@ export interface IMasteries {
     chestGranted: boolean;
     tokensEarned: number;
     summonerId: string;
-    ddragonIcon: string | undefined;
 }

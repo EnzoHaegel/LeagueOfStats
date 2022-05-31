@@ -34,20 +34,21 @@ export class ProfilComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['user'] && params['user'] !== '') {
         this.getSummonerByName(params['user']);
-      }
-      if (params['user'] && params['user'] !== '' && params['user'] !== localStorage.getItem("username")) {
+      } else if (params['puuid']) {
+        this.getSummonerByPuuid(params['puuid']);
+        localStorage.clear();
+      } else if (params['user'] && params['user'] !== '' && params['user'] !== localStorage.getItem("username")) {
         this.username.setValue(params['user']);
         localStorage.setItem("username", params['user']);
         this.onSearch();
+      } else if (this.username.value === '' && this.inputUsername) {
+        this.username.setValue(this.inputUsername);
+        localStorage.setItem("username", this.inputUsername);
+        this.onSearch();
+      } else if (localStorage.getItem("username")) {
+        this.username.setValue(localStorage.getItem("username"));
       }
     });
-    if (this.username.value === '' && this.inputUsername) {
-      this.username.setValue(this.inputUsername);
-      localStorage.setItem("username", this.inputUsername);
-      this.onSearch();
-    } else if (localStorage.getItem("username")) {
-      this.username.setValue(localStorage.getItem("username"));
-    }
   }
 
   public onSearch(): void {
@@ -60,6 +61,15 @@ export class ProfilComponent implements OnInit {
   public getSummonerByName(username: string): void {
     this.apiRiotService.getSummonerByName(username).subscribe(data => {
       this.summoner = data;
+      this.getLeagueById();
+      this.getMasteriesById();
+    });
+  }
+
+  public getSummonerByPuuid(puuid: string): void {
+    this.apiRiotService.getSummonerByPuuid(puuid).subscribe(data => {
+      this.summoner = data;
+      this.username.setValue(data.name);
       this.getLeagueById();
       this.getMasteriesById();
     });
@@ -109,18 +119,10 @@ export class ProfilComponent implements OnInit {
     }
     this.apiRiotService.getMasteriesBySummonerId(this.summoner?.id).subscribe(data => {
       this.masteries = data;
-      this.fillMasteryIcon();
     });
   }
 
   public getChampionIconById(championId: number): any {
     return 'assets/champion/' + this.championsService.getChampionInternalNameById(championId) + '.png';
-  }
-
-  public fillMasteryIcon() {
-    if (!this.masteries) {
-      return;
-    }
-    // for 5 first masteries
   }
 }

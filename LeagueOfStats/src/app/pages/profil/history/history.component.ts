@@ -32,7 +32,7 @@ export class HistoryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['puuid']) {
         this.matches = [];
-        this.getMatchesId(params['puuid'], 0, 5);
+        this.getMatchesId(params['puuid'], 0, 10);
         this.user_puuid = params['puuid'];
       }
     });
@@ -57,13 +57,13 @@ export class HistoryComponent implements OnInit {
       this.matches.push(data);
     });
   }
-
+  
   public getSummonerByName(): void {
     // save username in local storage
     localStorage.setItem("username", this.username.value);
-
+    
     this.apiRiotService.getSummonerByName(this.username.value).subscribe(data => {
-      this.getMatchesId(data.puuid, 0, 5);
+      this.getMatchesId(data.puuid, 0, 10);
       this.user_puuid = data.puuid;
     });
   }
@@ -94,7 +94,7 @@ export class HistoryComponent implements OnInit {
   }
 
   public secondesToMinutes(secondes: number): string {
-    return Math.floor(secondes / 60) + ":" + (secondes % 60);
+    return Math.floor(secondes / 60) + ":" + ((secondes % 60 < 10) ? '0' + (secondes % 60) : '' + (secondes % 60));
   }
 
   public getGameTypeName(gameMode: string, gameType: string): string {
