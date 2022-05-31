@@ -58,6 +58,7 @@ export class MapperRiotApiService {
     return {
       gameId: info.gameId,
       gameDuration: info.gameDuration,
+      gameEndTimestamp: info.gameEndTimestamp,
       gameCreation: info.gameCreation,
       gameVersion: info.gameVersion,
       gameMode: info.gameMode,

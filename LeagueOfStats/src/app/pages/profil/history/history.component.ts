@@ -56,7 +56,12 @@ export class HistoryComponent implements OnInit {
   public getMatches(id: string): void {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
-      this.fillMatcheParticipantsUsername(this.matches[this.matches.length - 1]);
+      console.log(data);
+      // this.fillMatcheParticipantsUsername(this.matches[this.matches.length - 1]);
+      // sort matches by info.gameEndTimestamp, the higher the first
+      this.matches.sort((a, b) => {
+        return b.info.gameEndTimestamp - a.info.gameEndTimestamp;
+      });
     });
   }
 

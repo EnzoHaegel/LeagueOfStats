@@ -49,6 +49,7 @@ export interface IMatch {
 export interface IInfo {
     gameId: number;
     gameDuration: number;
+    gameEndTimestamp: number;
     gameCreation: number;
     gameVersion: string;
     gameMode: string;
