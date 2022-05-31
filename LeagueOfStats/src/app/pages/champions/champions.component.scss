@@ -25,6 +25,7 @@
     }
 
     .champions {
+        width: calc(min(1280px, 100%));
         display: flex;
         margin: auto;
         justify-content: center;
