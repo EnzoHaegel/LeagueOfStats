@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,12 +17,16 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
+import { ChampionsComponent } from './pages/champions/champions.component';
+import { ChampionComponent } from './pages/champions/champion/champion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfilComponent,
-    HistoryComponent
+    HistoryComponent,
+    ChampionsComponent,
+    ChampionComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { MatDividerModule } from '@angular/material/divider';
     FormsModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    MatDividerModule
+    MatDividerModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

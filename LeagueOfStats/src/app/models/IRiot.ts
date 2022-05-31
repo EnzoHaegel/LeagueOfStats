@@ -87,6 +87,7 @@ export interface IObjective {
 }
 
 export interface IParticipant {
+    username: string | undefined;
     ddragonChampionIcon: string | undefined;
     championName: string | undefined;
     assists: number;

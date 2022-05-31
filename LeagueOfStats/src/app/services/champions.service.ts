@@ -41,4 +41,8 @@ export class ChampionsService {
   public getChampionJson(): string {
     return JSON.stringify(champion);
   }
+
+  public getChampions(): IChampion[] {
+    return this.champions;
+  }
 }

@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="search-champion">
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Search a champion</mat-label>
+            <input
+                (keyup)="onChangeEvent($event)"
+                matInput
+                placeholder="Username"
+                [formControl]="searchedChampion"
+                #input
+            >
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <div class="button">
+            <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="champions">
+        <div *ngFor="let champion of displayedChampions" class="champion-icon">
+            <img class="icon" [src]="'assets/champion/' + champion.id + '.png'">
+            <!-- <div class="overlay"></div> -->
+            <span class="champion-name">{{ champion.name }}</span>
+        </div>
+    </div>
+</div>

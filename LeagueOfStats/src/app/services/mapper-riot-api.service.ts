@@ -72,6 +72,7 @@ export class MapperRiotApiService {
 
   public mapParticipant(participant: any): IParticipant {
     return {
+      username: undefined,
       ddragonChampionIcon: undefined,
       championName: undefined,
       assists: participant.assists,

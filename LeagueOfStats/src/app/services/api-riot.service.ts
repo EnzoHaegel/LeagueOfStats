@@ -71,4 +71,10 @@ export class ApiRiotService {
       map((data: any) => data.map((mastery: any) => this.mapperRiotApiService.mapMasteries(mastery)))
     );
   }
+
+  public getSummonerNameByPuuid(puuid: string): Observable<string> {
+    return this.http.get(this.BASE_URL + 'summoner/puuid/' + puuid, { headers: this.headers }).pipe(
+      map((data: any) => data.name)
+    );
+  }
 }

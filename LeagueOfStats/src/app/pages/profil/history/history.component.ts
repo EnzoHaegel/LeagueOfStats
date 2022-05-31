@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { IMatch, IParticipant } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
@@ -55,9 +56,24 @@ export class HistoryComponent implements OnInit {
   public getMatches(id: string): void {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
+      this.fillMatcheParticipantsUsername(this.matches[this.matches.length - 1]);
     });
   }
-  
+
+  public fillAllMatchesParticipantsUsername(): void {
+    this.matches.map(match => {
+      this.fillMatcheParticipantsUsername(match);
+    });
+  }
+
+  public fillMatcheParticipantsUsername(match: IMatch): void {
+    for (let i = 0; i < match.info.participants.length; i++) {
+      this.getSummonerNameByPuuid(match.metadata.participants[i]).subscribe(username => {
+        match.info.participants[i].username = username;
+      });
+    }
+  }
+
   public getSummonerByName(): void {
     // save username in local storage
     localStorage.setItem("username", this.username.value);
@@ -66,6 +82,10 @@ export class HistoryComponent implements OnInit {
       this.getMatchesId(data.puuid, 0, 10);
       this.user_puuid = data.puuid;
     });
+  }
+
+  public getSummonerNameByPuuid(puuid: string): Observable<string> {
+    return this.apiRiotService.getSummonerNameByPuuid(puuid);
   }
 
   public onSearch(): void {
@@ -90,7 +110,7 @@ export class HistoryComponent implements OnInit {
   }
 
   public loadMore(): void {
-    this.getMatchesId(this.user_puuid, this.matches.length, 5);
+    this.getMatchesId(this.user_puuid, this.matches.length, 10);
   }
 
   public secondesToMinutes(secondes: number): string {
