@@ -6,10 +6,21 @@
             <div class="type-of-game">
                 <span class="vic-los">{{getStatsOfPlayer(match).win ? 'Victory' : 'Loss'}}</span>
                 {{ secondesToMinutes(match.info.gameDuration) + ' ' + match.info.gameMode + ' ' + getGameTypeName(match.info.gameMode, match.info.gameType) }}
+                <span class="time-ago">{{ nowSinceGameEndTimestamp(match.info.gameEndTimestamp) }}</span>
             </div>
             <div class="infos">
                 <div class="champion">
-                    <img class="champion-icon" [src]="getChampionIconById(getStatsOfPlayer(match).championId)" alt="">
+                    <div class="img">
+                        <img class="champion-icon" [src]="getChampionIconById(getStatsOfPlayer(match).championId)" alt="">
+                        <div class="summs">
+                            <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner1Id)">
+                            <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner2Id)">
+                        </div>
+                        <div class="summs">
+                            <div class="summs-icon"></div>
+                            <div class="summs-icon"></div>
+                        </div>
+                    </div>
                     <span class="champion-name">{{ championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) }}</span>
                 </div>
                 <div class="kda-container">
@@ -38,8 +49,8 @@
                                 <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
                                 <div
                                     [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
-                                    class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">
-                                   {{ match.info.participants[index].username || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
+                                    class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
+                                   {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
                                 </div>
                             </div>
                             <div class="kda-items">
@@ -96,8 +107,8 @@
                             <div class="champion">
                                 <span 
                                     [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
-                                    class="player-name" routerLink="/" [queryParams]="{puuid: match.metadata.participants[index]}">
-                                    {{ match.info.participants[index].username || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
+                                    class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
+                                    {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
                                 </span>
                                 <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
                             </div>

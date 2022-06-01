@@ -6,6 +6,7 @@ import { IMatch, IParticipant } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
+import { SummonersService } from 'src/app/services/summoners.service';
 
 @Component({
   selector: 'app-history',
@@ -26,6 +27,7 @@ export class HistoryComponent implements OnInit {
     public riotPicturesService: RiotPicturesService,
     private route: ActivatedRoute,
     public championsService: ChampionsService,
+    public summonersService: SummonersService,
   ) { }
 
   ngOnInit(): void {
@@ -35,13 +37,16 @@ export class HistoryComponent implements OnInit {
         this.matches = [];
         this.getMatchesId(params['puuid'], 0, 10);
         this.user_puuid = params['puuid'];
+      } else if (params['user']) {
+        this.username.setValue(params['user']);
+        this.onSearch();
       }
     });
 
     if (this.username.value === '' && this.inputUsername) {
       this.username.setValue(this.inputUsername);
       this.getSummonerByName();
-    } else if (localStorage.getItem("username")) {
+    } else if (this.username.value === '' && localStorage.getItem("username")) {
       this.username.setValue(localStorage.getItem("username"));
       this.getSummonerByName();
     }
@@ -57,26 +62,11 @@ export class HistoryComponent implements OnInit {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
       console.log(data);
-      // this.fillMatcheParticipantsUsername(this.matches[this.matches.length - 1]);
       // sort matches by info.gameEndTimestamp, the higher the first
       this.matches.sort((a, b) => {
         return b.info.gameEndTimestamp - a.info.gameEndTimestamp;
       });
     });
-  }
-
-  public fillAllMatchesParticipantsUsername(): void {
-    this.matches.map(match => {
-      this.fillMatcheParticipantsUsername(match);
-    });
-  }
-
-  public fillMatcheParticipantsUsername(match: IMatch): void {
-    for (let i = 0; i < match.info.participants.length; i++) {
-      this.getSummonerNameByPuuid(match.metadata.participants[i]).subscribe(username => {
-        match.info.participants[i].username = username;
-      });
-    }
   }
 
   public getSummonerByName(): void {
@@ -139,5 +129,21 @@ export class HistoryComponent implements OnInit {
 
   public calcKda(participant: IParticipant): string {
     return ((participant.kills + participant.assists) / participant.deaths).toFixed(2).toString();
+  }
+
+  public nowSinceGameEndTimestamp(timestamp: number): string {
+    let now = new Date().getTime();
+    let diff = now - timestamp;
+
+    // return since when game ended in the highest value (days or hours or minutes)
+    if (diff > 86400000) {
+      return Math.floor(diff / 86400000) + " days ago";
+    } else if (diff > 3600000) {
+      return Math.floor(diff / 3600000) + " hours ago";
+    } else if (diff > 60000) {
+      return Math.floor(diff / 60000) + " minutes ago";
+    } else {
+      return Math.floor(diff / 1000) + " seconds ago";
+    }
   }
 }

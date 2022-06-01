@@ -30,13 +30,18 @@
             .type-of-game {
                 width: 100%;
                 font-size: 15px;
-                color: #fff;
+                color: #ddd;
                 padding: 5px;
                 border-radius: 5px;
                 display: flex;
 
                 .vic-los {
                     margin-right: 10px;
+                }
+
+                .time-ago {
+                    margin-left: 10px;
+                    font-size: 13px;
                 }
             }
 
@@ -48,21 +53,39 @@
 
                 .champion {
                     justify-content: center;
-                    align-items: center;
                     display: flex;
                     flex-direction: column;
                     margin-right: 10px;
 
-                    .champion-icon {
-                        width: 48px;
-                        height: 48px;
-                        margin-left: 5px;
-                        border-radius: 100%;
+                    .img {
+                        display: flex;
+
+                        .champion-icon {
+                            width: 48px;
+                            height: 48px;
+                            margin-left: 5px;
+                            margin-right: 5px;
+                            border-radius: 100%;
+                        }
+
+                        .summs {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+
+                            .summs-icon {
+                                width: 21px;
+                                height: 21px;
+                                margin: 1px;
+                                border-radius: 5px;
+                                background-color: rgba(255, 255, 255, 0.2);
+                            }
+                        }
                     }
 
                     .champion-name {
                         font-size: 15px;
-                        color: #fff;
+                        color: #ddd;
                         margin-left: 5px;
                     }
                 }
@@ -73,13 +96,13 @@
                     justify-content: center;
                     margin-left: 5px;
                     position: relative;
-                    
+
                     .kda-text {
                         justify-content: center;
                         align-items: center;
                         font-size: 14px;
                         display: flex;
-                        color: #fff;
+                        color: #ddd;
                     }
 
                     .kda-ratio {
@@ -87,7 +110,7 @@
                         align-items: center;
                         font-size: 13px;
                         display: flex;
-                        color: #fff;
+                        color: #ddd;
                     }
                 }
 
@@ -133,20 +156,20 @@
                                 }
 
                                 .player-name {
-                                    margin-right: 3px;
+                                    margin-left: 3px;
                                     font-size: 12px;
-                                    color: #fff;
+                                    color: #ddd;
                                     cursor: pointer;
                                     text-overflow: ellipsis;
                                     overflow: hidden;
                                     white-space: nowrap;
+                                    width: 64px;
 
                                     &:hover {
                                         text-decoration: underline;
                                     }
                                 }
                             }
-
 
                             .kda-items {
                                 display: flex;
@@ -157,7 +180,7 @@
                                     margin-left: 3px;
                                     margin-right: 3px;
                                     font-size: 12px;
-                                    color: #fff;
+                                    color: #ddd;
                                 }
 
                                 .item-block {
@@ -193,6 +216,7 @@
             }
         }
     }
+
     .load {
         max-width: calc(min(800px, 100% - 200px));
         margin-left: auto;
@@ -240,7 +264,7 @@
 }
 
 // when width is lower than 1062px, hide items
-@media screen and (max-width: 1210px) {
+@media screen and (max-width: 1274px) {
     .container {
         .match-history {
             .game-content {
@@ -266,8 +290,7 @@
     }
 }
 
-
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 750px) {
     .container {
         .match-history {
             .game-content {
@@ -289,7 +312,7 @@
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
     .container {
         .match-history {
             .game-content {

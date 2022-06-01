@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-59498973-b1c9-4340-b826-1ebd641e7420"
+const API_KEY = "RGAPI-c2b577ff-a6c8-40d6-b41a-cc246e997c23"
 
 // a function that log requests
 function checkLocalhost (req, res, next) {

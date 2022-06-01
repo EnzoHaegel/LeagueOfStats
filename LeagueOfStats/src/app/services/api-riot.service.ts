@@ -8,7 +8,7 @@ import { ILeague, IMasteries, ISummoner } from '../models/IRiot';
   providedIn: 'root'
 })
 export class ApiRiotService {
-  public BASE_URL = 'http://localhost:3000/api/';
+  public BASE_URL = 'https://us-central1-leagueofstatsapi.cloudfunctions.net/app/api/';
 
   public headers = new HttpHeaders({
     'Content-Type': 'application/json',

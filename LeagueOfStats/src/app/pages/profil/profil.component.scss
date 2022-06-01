@@ -47,14 +47,14 @@
                 padding: 5px;
                 height: fit-content;
                 margin-bottom: 10px;
-    
+
                 .profil-infos {
-    
+
                     .player-infos {
                         margin: 5px;
                         display: flex;
                         margin-bottom: 10px;
-    
+
                         .player-icon {
                             width: 75px;
                             height: 75px;
@@ -62,10 +62,10 @@
                             margin-left: 5px;
                             border: 3px solid #696969;
                         }
-    
+
                         .player-name {
                             font-size: 18px;
-                            color: #fff;
+                            color: #ddd;
                             margin-left: 5px;
                             display: flex;
                             flex-direction: column;
@@ -73,38 +73,38 @@
                             margin-bottom: 3px;
                         }
                     }
-    
+
                     .rank-player {
                         margin-top: 10px;
                         display: flex;
                         flex-direction: column;
-    
+
                         .league-name {
                             font-size: 15px;
-                            color: #fff;
+                            color: #ddd;
                             margin-left: 5px;
                             margin-top: 10px;
                         }
-    
+
                         .rank-infos {
                             display: flex;
                             flex-direction: row;
-    
+
                             .rank-icon {
                                 margin-left: 10px;
                                 width: 75px;
                                 height: 75px;
                             }
-    
+
                             .rank-name {
                                 margin-top: auto;
                                 margin-bottom: 5px;
                                 font-size: 14px;
-                                color: #fff;
+                                color: #ddd;
                                 margin-left: 5px;
                                 display: flex;
                                 flex-direction: column;
-    
+
                                 .winrate {
                                     font-size: 12px;
                                 }
@@ -130,6 +130,7 @@
                     padding: 5px;
                     font-size: 15px;
                     align-items: center;
+                    color: #ddd;
 
                     .champion-icon {
                         width: 32px;
@@ -150,7 +151,7 @@
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     .container {
         .infos {
             flex-direction: column;
@@ -160,8 +161,6 @@
                 margin: 10px;
                 margin-right: 15px;
                 position: relative;
-                .profil {
-                }
             }
 
             .history {

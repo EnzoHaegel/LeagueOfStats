@@ -73,9 +73,18 @@ export class MapperRiotApiService {
 
   public mapParticipant(participant: any): IParticipant {
     return {
-      username: undefined,
+      spell1Casts: participant.spell1Casts,
+      spell2Casts: participant.spell2Casts,
+      spell3Casts: participant.spell3Casts,
+      spell4Casts: participant.spell4Casts,
+      summoner1Casts: participant.summoner1Casts,
+      summoner1Id: participant.summoner1Id,
+      summoner2Casts: participant.summoner2Casts,
+      summoner2Id: participant.summoner2Id,
+      totalMinionsKilled: participant.totalMinionsKilled,
+      summonerName: participant.summonerName,
       ddragonChampionIcon: undefined,
-      championName: undefined,
+      championName: participant.championName,
       assists: participant.assists,
       baronKills: participant.baronKills,
       championId: participant.championId,
