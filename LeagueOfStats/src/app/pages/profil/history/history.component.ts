@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IMatch, IParticipant } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
+import { ItemsService } from 'src/app/services/items.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 import { SummonersService } from 'src/app/services/summoners.service';
 
@@ -28,6 +29,7 @@ export class HistoryComponent implements OnInit {
     private route: ActivatedRoute,
     public championsService: ChampionsService,
     public summonersService: SummonersService,
+    public itemsService: ItemsService,
   ) { }
 
   ngOnInit(): void {

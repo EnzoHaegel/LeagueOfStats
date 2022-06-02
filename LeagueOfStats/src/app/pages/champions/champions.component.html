@@ -18,7 +18,8 @@
     <mat-divider class="divider"></mat-divider>
     <div class="champions">
         <div *ngFor="let champion of displayedChampions" class="champion-icon">
-            <img class="icon" [src]="'assets/champion/' + champion.id + '.png'">
+            <ng-template #popContent><app-popover [champion]="champion"></app-popover></ng-template>
+            <img [openDelay]="150" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" class="icon" [src]="'assets/champion/' + champion.id + '.png'">
             <!-- <div class="overlay"></div> -->
             <span class="champion-name">{{ champion.name }}</span>
         </div>

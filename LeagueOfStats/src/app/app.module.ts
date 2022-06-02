@@ -19,6 +19,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { ChampionsComponent } from './pages/champions/champions.component';
 import { ChampionComponent } from './pages/champions/champion/champion.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PopoverComponent } from './pages/champions/popover/popover.component';
+import { AttentionComponent } from './utils/attention/attention.component';
+import { ItemPopoverComponent } from './utils/item-popover/item-popover.component';
+import { ItemBlockComponent } from './pages/profil/history/item-block/item-block.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,11 @@ import { ChampionComponent } from './pages/champions/champion/champion.component
     ProfilComponent,
     HistoryComponent,
     ChampionsComponent,
-    ChampionComponent
+    ChampionComponent,
+    PopoverComponent,
+    AttentionComponent,
+    ItemPopoverComponent,
+    ItemBlockComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,8 @@ import { ChampionComponent } from './pages/champions/champion/champion.component
     ReactiveFormsModule,
     MatTooltipModule,
     MatDividerModule,
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

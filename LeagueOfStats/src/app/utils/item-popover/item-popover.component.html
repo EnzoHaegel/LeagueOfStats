@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="head">
+        <img class="icon" [src]="'assets/item/' + item.image.full">
+        <div class="infos">
+            <div class="name">{{ item.name }}</div>
+            <div class="cost">{{ item.gold.total }}</div>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="description" [innerHTML]="item.description"></div>
+</div>

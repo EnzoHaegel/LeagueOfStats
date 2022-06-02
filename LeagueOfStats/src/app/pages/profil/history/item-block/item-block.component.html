@@ -1,0 +1,9 @@
+<ng-template #popContent0><app-item-popover [item]="itemsService.getItem(itemId)"></app-item-popover></ng-template>
+<img 
+    *ngIf="itemId > 0"
+    [openDelay]="150"
+    [ngbPopover]="popContent0"
+    triggers="mouseenter:mouseleave"
+    class="item-picture"
+    [src]="'assets/item/' + itemId + '.png'"
+>

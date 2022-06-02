@@ -1,0 +1,20 @@
+.container {
+    background-color: #424242;
+    border-radius: 5px;
+    border: 1px solid #696969;
+    padding: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.8);
+    color: #ddd;
+    display: block;
+    width: calc(min(300px, 90vw));
+    font-size: 13px;
+
+    .divider {
+        margin: 5px;
+    }
+
+    .name {
+        color: #fff;
+        font-size: 15px;
+    }
+}

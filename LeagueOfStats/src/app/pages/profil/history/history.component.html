@@ -28,12 +28,36 @@
                     <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
                 </div>
                 <div class="items">
-                    <img *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'" alt="">
-                    <img *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'" alt="">
-                    <img *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item2 + '.png'" alt="">
-                    <img *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'" alt="">
-                    <img *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'" alt="">
-                    <img *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'" alt="">
+                    <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
+                    <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
+                    <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>
+                    <ng-template #popContent3><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item3)"></app-item-popover></ng-template>
+                    <ng-template #popContent4><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item4)"></app-item-popover></ng-template>
+                    <ng-template #popContent5><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item5)"></app-item-popover></ng-template>
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent0"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'" alt="">
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent1"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'" alt="">
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent2"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item2 + '.png'" alt="">
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent3"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'" alt="">
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent4"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'" alt="">
+                    <img [openDelay]="150"
+                        [ngbPopover]="popContent5"
+                        triggers="mouseenter:mouseleave"
+                        *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'" alt="">
                     <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
                     <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
                     <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
@@ -56,24 +80,12 @@
                             <div class="kda-items">
                                 <span class="kda" [ngStyle]="{'margin-right': '0'}">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
                                 <div class="item-block">
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item0 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item0 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item1 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item1 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item2 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item2 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item3 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item3 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item4 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item4 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item5 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item5 + '.png'" alt="">
-                                    </div>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
                                 </div>
                             </div>
                         </div>
@@ -83,24 +95,12 @@
                         <div *ngFor="let index of [5, 6, 7, 8, 9]" class="player">
                             <div class="kda-items">
                                 <div class="item-block">
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item0 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item0 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item1 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item1 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item2 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item2 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item3 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item3 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item4 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item4 + '.png'" alt="">
-                                    </div>
-                                    <div class="item-icon">
-                                        <img *ngIf="match.info.participants[index].item5 > 0" class="item-picture" [src]="'assets/item/' + match.info.participants[index].item5 + '.png'" alt="">
-                                    </div>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
+                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
                                 </div>
                                 <span [ngStyle]="{'margin-left': '0'}" class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
                             </div>
