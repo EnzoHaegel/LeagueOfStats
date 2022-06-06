@@ -172,6 +172,20 @@
     }
 }
 
+.ad-banner {
+    display: none;
+    // place 10 px from left and 200 px from top
+    position: fixed;
+    top: 200px;
+    left: 10px;
+}
+
+@media screen and (max-width: 1800px) {
+    .ad-banner {
+        display: block;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .container {
         margin: 0;

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Banner } from 'src/app/models/Banner';
 import { ISummoner, ILeague, IMasteries } from 'src/app/models/IRiot';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
@@ -13,6 +14,8 @@ import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 })
 export class ProfilComponent implements OnInit {
   @Input() inputUsername: string | undefined;
+
+  public banner!: Banner;
 
   public username = new FormControl('');
 

@@ -24,6 +24,7 @@ import { PopoverComponent } from './pages/champions/popover/popover.component';
 import { AttentionComponent } from './utils/attention/attention.component';
 import { ItemPopoverComponent } from './utils/item-popover/item-popover.component';
 import { ItemBlockComponent } from './pages/profil/history/item-block/item-block.component';
+import { AdsenseModule } from 'ng2-adsense';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { ItemBlockComponent } from './pages/profil/history/item-block/item-block
     PopoverComponent,
     AttentionComponent,
     ItemPopoverComponent,
-    ItemBlockComponent
+    ItemBlockComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,8 @@ import { ItemBlockComponent } from './pages/profil/history/item-block/item-block
     MatTooltipModule,
     MatDividerModule,
     CommonModule,
-    NgbModule
+    NgbModule,
+    AdsenseModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
