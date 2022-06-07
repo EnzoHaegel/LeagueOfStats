@@ -9,6 +9,7 @@ import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
+import { RunesService } from 'src/app/services/runes.service';
 import { SummonersService } from 'src/app/services/summoners.service';
 
 @Component({
@@ -48,6 +49,7 @@ export class HistoryComponent implements OnInit {
     public championsService: ChampionsService,
     public summonersService: SummonersService,
     public itemsService: ItemsService,
+    public runesService: RunesService,
   ) { }
 
   ngOnInit(): void {
@@ -81,6 +83,7 @@ export class HistoryComponent implements OnInit {
   public getMatches(id: string): void {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
+      console.log(data.info.participants[0].perks);
       // sort matches by info.gameEndTimestamp, the higher the first
       this.matches.sort((a, b) => {
         return b.info.gameEndTimestamp - a.info.gameEndTimestamp;
