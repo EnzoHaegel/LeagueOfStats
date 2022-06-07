@@ -1,5 +1,11 @@
 <div class="container">
-    <div *ngFor="let match of matches" class="match-history" [ngClass]="getStatsOfPlayer(match).win ? 'win' : 'loss'">
+    <div>
+        <mat-tab-group (selectedTabChange)="tabChanged($event)">
+            <mat-tab label="All"></mat-tab>
+            <mat-tab label="Rankeds"></mat-tab>
+        </mat-tab-group>
+    </div>
+    <div *ngFor="let match of getMatchesRanked()" class="match-history" [ngClass]="getStatsOfPlayer(match).win ? 'win' : 'loss'">
         <div class="color-secondary" [ngClass]="getStatsOfPlayer(match).win ? 'win-secondary' : 'loss-secondary'">
         </div>
         <div class="game">

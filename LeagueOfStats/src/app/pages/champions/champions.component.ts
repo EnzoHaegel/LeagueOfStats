@@ -30,7 +30,6 @@ export class ChampionsComponent implements OnInit {
   }
 
   public onChangeEvent(event: any): void {
-    console.log(event);
     if (event.target.value === '') {
       this.displayedChampions = this.champions;
     } else {

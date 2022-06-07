@@ -27,6 +27,7 @@ import { ItemBlockComponent } from './pages/profil/history/item-block/item-block
 import { AdsenseModule } from 'ng2-adsense';
 import { MoreGameInfosComponent } from './pages/profil/history/more-game-infos/more-game-infos.component';
 import { CurrentGameComponent } from './pages/profil/history/current-game/current-game.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CurrentGameComponent } from './pages/profil/history/current-game/curren
     CommonModule,
     NgbModule,
     AdsenseModule.forRoot(),
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

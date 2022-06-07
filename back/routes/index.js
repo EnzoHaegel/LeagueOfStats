@@ -176,4 +176,20 @@ router.get('/masteries/:summonerId', checkLocalhost, (req, res) => {
     });
 });
 
+// https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/Os_pok6009bWwaD2SMmBT1DoASK7F_w8jXeS-5-6YpZgZbY
+router.get('/active-games/:summonerId', checkLocalhost, (req, res) => {
+    const summonerId = req.params.summonerId;
+    const url = `https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerId}?api_key=${API_KEY}`;
+    https.get(url, (response) => {
+        let body = '';
+        response.on('data', (chunk) => {
+            body += chunk;
+        });
+        response.on('end', () => {
+            const parsed = JSON.parse(body);
+            res.status(200).json(parsed);
+        });
+    });
+});
+
 module.exports = router;

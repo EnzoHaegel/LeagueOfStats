@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IMatch, IParticipant } from 'src/app/models/IRiot';
@@ -33,6 +34,8 @@ export class HistoryComponent implements OnInit {
   @Input() inputUsername: string | undefined;
 
   public matches: IMatch[] = [];
+
+  public onlyRankeds: boolean = false;
 
   public user_puuid: string = "";
 
@@ -78,7 +81,6 @@ export class HistoryComponent implements OnInit {
   public getMatches(id: string): void {
     this.apiRiotService.getMatchsById(id).subscribe((data: IMatch) => {
       this.matches.push(data);
-      console.log(data);
       // sort matches by info.gameEndTimestamp, the higher the first
       this.matches.sort((a, b) => {
         return b.info.gameEndTimestamp - a.info.gameEndTimestamp;
@@ -166,5 +168,21 @@ export class HistoryComponent implements OnInit {
 
   public moreInfos(match: IMatch): void {
     match.more = !match.more;
+  }
+
+  public tabChanged = (tabChangeEvent: MatTabChangeEvent): void => {
+    if (tabChangeEvent.index === 0) {
+      this.onlyRankeds = false;
+    } else if (tabChangeEvent.index === 1) {
+      this.onlyRankeds = true;
+    }
+  }
+
+  public getMatchesRanked(): IMatch[] {
+    if (this.onlyRankeds) {
+      return this.matches.filter(match => match.info.gameMode === "CLASSIC" && match.info.gameType === "MATCHED_GAME");
+    } else {
+      return this.matches;
+    }
   }
 }

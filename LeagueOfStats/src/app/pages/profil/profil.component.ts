@@ -153,13 +153,13 @@ export class ProfilComponent implements OnInit {
     if (this.summoner.profileIconId < 40) {
       count += 1;
     }
-    if ((this.getRankedLeague('RANKED_SOLO_5x5')!.wins + this.getRankedLeague('RANKED_SOLO_5x5')!.losses) < 70) {
+    if (this.getRankedLeague('RANKED_SOLO_5x5') && (this.getRankedLeague('RANKED_SOLO_5x5')!.wins + this.getRankedLeague('RANKED_SOLO_5x5')!.losses) < 70) {
       count += 1;
     }
-    if (this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) > 60) {
+    if (this.getRankedLeague('RANKED_SOLO_5x5') && this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) > 60) {
       count += 1;
     }
-    if (this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) < 40) {
+    if (this.getRankedLeague('RANKED_SOLO_5x5') && this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) < 40) {
       count -= 1;
     }
     if (count > 2) {
