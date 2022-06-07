@@ -55,6 +55,24 @@
                         display: flex;
                         margin-bottom: 10px;
 
+                        .smurf {
+                            padding: 3px;
+                            border-radius: 5px;
+                            background: -webkit-linear-gradient(left, rgba(255, 82, 82, 0.3), rgba(255, 82, 82, 0.3));
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 12px;
+                            margin-bottom: 3px;
+
+                            .icon {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 12px;
+                            }
+                        }
+
                         .player-icon {
                             width: 75px;
                             height: 75px;

@@ -37,9 +37,10 @@ export class ProfilComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['user'] && params['user'] !== '') {
         this.getSummonerByName(params['user']);
+        this.resetProfile();
       } else if (params['puuid']) {
         this.getSummonerByPuuid(params['puuid']);
-        localStorage.clear();
+        this.resetProfile();
       } else if (params['user'] && params['user'] !== '' && params['user'] !== localStorage.getItem("username")) {
         this.username.setValue(params['user']);
         localStorage.setItem("username", params['user']);
@@ -50,15 +51,24 @@ export class ProfilComponent implements OnInit {
         this.onSearch();
       } else if (localStorage.getItem("username")) {
         this.username.setValue(localStorage.getItem("username"));
+        this.onSearch();
       }
     });
   }
 
   public onSearch(): void {
     localStorage.setItem("username", this.username.value);
+    this.resetProfile();
     this.router.navigate(['/'], { queryParams: { user: this.username.value } }).then(() => {
       window.location.reload();
     });
+  }
+
+  public resetProfile(): void {
+    localStorage.clear();
+    this.summoner = undefined;
+    this.league = undefined;
+    this.masteries = undefined;
   }
 
   public getSummonerByName(username: string): void {
@@ -127,5 +137,35 @@ export class ProfilComponent implements OnInit {
 
   public getChampionIconById(championId: number): any {
     return 'assets/champion/' + this.championsService.getChampionInternalNameById(championId) + '.png';
+  }
+
+  public isSmurf(): boolean {
+    let count = 0;
+    if (!this.summoner) {
+      return false;
+    }
+    if (this.summoner.summonerLevel < 70) {
+      count += 1;
+    }
+    if (this.summoner.summonerLevel < 40) {
+      count += 2;
+    }
+    if (this.summoner.profileIconId < 40) {
+      count += 1;
+    }
+    if ((this.getRankedLeague('RANKED_SOLO_5x5')!.wins + this.getRankedLeague('RANKED_SOLO_5x5')!.losses) < 70) {
+      count += 1;
+    }
+    if (this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) > 60) {
+      count += 1;
+    }
+    if (this.calcWinrate(this.getRankedLeague('RANKED_SOLO_5x5')) < 40) {
+      count -= 1;
+    }
+    if (count > 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

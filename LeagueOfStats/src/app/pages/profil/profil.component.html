@@ -17,6 +17,11 @@
                     <div class="player-infos">
                         <img class="player-icon" [src]="getIconById()" alt="">
                         <div class="player-name">
+                            <div *ngIf="isSmurf()" class="smurf">
+                                <!-- Warn Icon-->
+                                <mat-icon class="icon" [ngStyle]="{'font-size': '12px'}">warning</mat-icon>
+                                <span>Smurf</span>
+                            </div>
                             <span [ngStyle]="{'font-size': '16px'}">{{ 'Lvl: ' + summoner?.summonerLevel }}</span>
                             <span>{{ summoner?.name }}</span>
                         </div>
