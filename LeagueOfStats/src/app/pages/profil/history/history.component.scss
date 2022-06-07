@@ -13,7 +13,6 @@
         margin-bottom: 5px;
         display: flex;
         height: fit-content;
-        justify-content: space-between;
 
         .color-secondary {
             width: 10px;
@@ -26,6 +25,7 @@
         .game {
             display: flex;
             flex-direction: column;
+            width: calc(100% - 50px);
 
             .game-content {
                 justify-content: space-between;
@@ -233,12 +233,14 @@
         }
 
         .more-infos-button {
+            float:right;
             width: 30px;
             min-height: 100%;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            margin-left: 5px;
             display: flex;
+            margin-left: 5px;
+            
             cursor: pointer;
 
             &:hover {
