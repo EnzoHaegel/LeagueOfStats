@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IInfo, ILeague, IMasteries, IMatch, IMatchMetadata, IObjective, IObjectives, IParticipant, IPerks, IPerkSelection, IStatPerks, IStyles, ISummoner, ITeam, ITeamBan } from '../models/IRiot';
+import { IBannedChampion, IGameCustomizationObject, IObserver, IParticipantS, IPerksS, ISpectator } from '../models/ISpectator';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,7 @@ export class MapperRiotApiService {
     return {
       metadata: this.mapMetadata(match.metadata),
       info: this.mapInfo(match.info),
+      more: false,
     }
   }
 
@@ -232,6 +234,66 @@ export class MapperRiotApiService {
       chestGranted: masteries.chestGranted,
       tokensEarned: masteries.tokensEarned,
       summonerId: masteries.summonerId,
+    };
+  }
+
+  public mapISpectator(spectator: any): ISpectator {
+    return {
+      gameId: spectator.gameId,
+      gameType: spectator.gameType,
+      gameStartTime: spectator.gameStartTime,
+      mapId: spectator.mapId,
+      gameLength: spectator.gameLength,
+      platformId: spectator.platformId,
+      gameMode: spectator.gameMode,
+      bannedChampions: spectator.bannedChampions.map((b: any) => this.mapBannedChampion(b)),
+      gameQueueConfigId: spectator.gameQueueConfigId,
+      observers: this.mapObserver(spectator.observers),
+      participants: spectator.participants.map((p: any) => this.mapParticipantS(p)),
+    };
+  }
+
+  public mapObserver(observer: any): IObserver {
+    return {
+      encryptionKey: observer.encryptionKey,
+    };
+  }
+
+  public mapGameCustomizationObject(gameCustomizationObject: any): IGameCustomizationObject {
+    return {
+      category: gameCustomizationObject.category,
+      content: gameCustomizationObject.content,
+    };
+  }
+
+  public mapPerksS(perks: any): IPerksS {
+    return {
+      perkIds: perks.perkIds,
+      perkStyle: perks.perkStyle,
+      perkSubStyle: perks.perkSubStyle,
+    };
+  }
+
+  public mapParticipantS(participant: any): IParticipantS {
+    return {
+      championId: participant.championId,
+      perks: this.mapPerksS(participant.perks),
+      profileIconId: participant.profileIconId,
+      bot: participant.bot,
+      teamId: participant.teamId,
+      summonerName: participant.summonerName,
+      summonerId: participant.summonerId,
+      spell1Id: participant.spell1Id,
+      spell2Id: participant.spell2Id,
+      gameCustomizationObjects: participant.gameCustomizationObjects.map((g: any) => this.mapGameCustomizationObject(g)),
+    };
+  }
+
+  public mapBannedChampion(bannedChampion: any): IBannedChampion {
+    return {
+      pickTurn: bannedChampion.pickTurn,
+      championId: bannedChampion.championId,
+      teamId: bannedChampion.teamId,
     };
   }
 }

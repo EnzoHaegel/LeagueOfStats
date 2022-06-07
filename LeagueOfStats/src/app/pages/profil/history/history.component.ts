@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -12,7 +13,21 @@ import { SummonersService } from 'src/app/services/summoners.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  styleUrls: ['./history.component.scss'],
+  animations: [
+    trigger(
+      'more', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('500ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 export class HistoryComponent implements OnInit {
   @Input() inputUsername: string | undefined;
@@ -37,7 +52,7 @@ export class HistoryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['puuid']) {
         this.matches = [];
-        this.getMatchesId(params['puuid'], 0, 10);
+        this.getMatchesId(params['puuid'], 0, 1);
         this.user_puuid = params['puuid'];
       } else if (params['user']) {
         this.username.setValue(params['user']);
@@ -76,7 +91,7 @@ export class HistoryComponent implements OnInit {
     localStorage.setItem("username", this.username.value);
     
     this.apiRiotService.getSummonerByName(this.username.value).subscribe(data => {
-      this.getMatchesId(data.puuid, 0, 10);
+      this.getMatchesId(data.puuid, 0, 1);
       this.user_puuid = data.puuid;
     });
   }
@@ -147,5 +162,9 @@ export class HistoryComponent implements OnInit {
     } else {
       return Math.floor(diff / 1000) + " seconds ago";
     }
+  }
+
+  public moreInfos(match: IMatch): void {
+    match.more = !match.more;
   }
 }

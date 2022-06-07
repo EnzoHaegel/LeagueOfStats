@@ -25,6 +25,8 @@ import { AttentionComponent } from './utils/attention/attention.component';
 import { ItemPopoverComponent } from './utils/item-popover/item-popover.component';
 import { ItemBlockComponent } from './pages/profil/history/item-block/item-block.component';
 import { AdsenseModule } from 'ng2-adsense';
+import { MoreGameInfosComponent } from './pages/profil/history/more-game-infos/more-game-infos.component';
+import { CurrentGameComponent } from './pages/profil/history/current-game/current-game.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AdsenseModule } from 'ng2-adsense';
     AttentionComponent,
     ItemPopoverComponent,
     ItemBlockComponent,
+    MoreGameInfosComponent,
+    CurrentGameComponent,
   ],
   imports: [
     BrowserModule,

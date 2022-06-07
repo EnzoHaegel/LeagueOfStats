@@ -2,120 +2,132 @@
     <div *ngFor="let match of matches" class="match-history" [ngClass]="getStatsOfPlayer(match).win ? 'win' : 'loss'">
         <div class="color-secondary" [ngClass]="getStatsOfPlayer(match).win ? 'win-secondary' : 'loss-secondary'">
         </div>
-        <div class="game-content">
-            <div class="type-of-game">
-                <span class="vic-los">{{getStatsOfPlayer(match).win ? 'Victory' : 'Loss'}}</span>
-                {{ secondesToMinutes(match.info.gameDuration) + ' ' + match.info.gameMode + ' ' + getGameTypeName(match.info.gameMode, match.info.gameType) }}
-                <span class="time-ago">{{ nowSinceGameEndTimestamp(match.info.gameEndTimestamp) }}</span>
-            </div>
-            <div class="infos">
-                <div class="champion">
-                    <div class="img">
-                        <img class="champion-icon" [src]="getChampionIconById(getStatsOfPlayer(match).championId)" alt="">
-                        <div class="summs">
-                            <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner1Id)">
-                            <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner2Id)">
+        <div class="game">
+            <div class="game-content">
+                <div class="type-of-game">
+                    <span class="vic-los">{{getStatsOfPlayer(match).win ? 'Victory' : 'Loss'}}</span>
+                    {{ secondesToMinutes(match.info.gameDuration) + ' ' + match.info.gameMode + ' ' + getGameTypeName(match.info.gameMode, match.info.gameType) }}
+                    <span class="time-ago">{{ nowSinceGameEndTimestamp(match.info.gameEndTimestamp) }}</span>
+                </div>
+                <div class="infos">
+                    <div class="champion">
+                        <div class="img">
+                            <img class="champion-icon" [src]="getChampionIconById(getStatsOfPlayer(match).championId)" alt="">
+                            <div class="summs">
+                                <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner1Id)">
+                                <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner2Id)">
+                            </div>
+                            <div class="summs">
+                                <div class="summs-icon"></div>
+                                <div class="summs-icon"></div>
+                            </div>
                         </div>
-                        <div class="summs">
-                            <div class="summs-icon"></div>
-                            <div class="summs-icon"></div>
-                        </div>
+                        <span class="champion-name">{{ championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) }}</span>
                     </div>
-                    <span class="champion-name">{{ championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) }}</span>
-                </div>
-                <div class="kda-container">
-                    <span class="kda-text">{{ getStatsOfPlayer(match).kills }} / {{ getStatsOfPlayer(match).deaths }} / {{ getStatsOfPlayer(match).assists }}</span>
-                    <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
-                </div>
-                <div class="items">
-                    <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
-                    <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
-                    <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>
-                    <ng-template #popContent3><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item3)"></app-item-popover></ng-template>
-                    <ng-template #popContent4><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item4)"></app-item-popover></ng-template>
-                    <ng-template #popContent5><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item5)"></app-item-popover></ng-template>
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent0"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'">
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent1"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'">
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent2"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item2 + '.png'">
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent3"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'">
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent4"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'">
-                    <img [openDelay]="150"
-                        [ngbPopover]="popContent5"
-                        triggers="mouseenter:mouseleave"
-                        *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'">
-                    <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
-                    <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
-                    <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
-                    <span *ngIf="getStatsOfPlayer(match).item3 == 0" class="item-icon"></span>
-                    <span *ngIf="getStatsOfPlayer(match).item4 == 0" class="item-icon"></span>
-                    <span *ngIf="getStatsOfPlayer(match).item5 == 0" class="item-icon"></span>
-                </div>
+                    <div class="kda-container">
+                        <span class="kda-text">{{ getStatsOfPlayer(match).kills }} / {{ getStatsOfPlayer(match).deaths }} / {{ getStatsOfPlayer(match).assists }}</span>
+                        <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
+                    </div>
+                    <div class="items">
+                        <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
+                        <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
+                        <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>
+                        <ng-template #popContent3><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item3)"></app-item-popover></ng-template>
+                        <ng-template #popContent4><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item4)"></app-item-popover></ng-template>
+                        <ng-template #popContent5><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item5)"></app-item-popover></ng-template>
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent0"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'">
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent1"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'">
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent2"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item2 + '.png'">
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent3"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'">
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent4"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'">
+                        <img [openDelay]="150"
+                            [ngbPopover]="popContent5"
+                            triggers="mouseenter:mouseleave"
+                            *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'">
+                        <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
+                        <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
+                        <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
+                        <span *ngIf="getStatsOfPlayer(match).item3 == 0" class="item-icon"></span>
+                        <span *ngIf="getStatsOfPlayer(match).item4 == 0" class="item-icon"></span>
+                        <span *ngIf="getStatsOfPlayer(match).item5 == 0" class="item-icon"></span>
+                    </div>
 
-                <div class="all-players">
-                    <div class="team">
-                        <div *ngFor="let index of [0, 1, 2, 3, 4]" class="player">
-                            <div class="champion">
-                                <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
-                                <div
-                                    [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
-                                    class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
-                                   {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
+                    <div class="all-players">
+                        <div class="team">
+                            <div *ngFor="let index of [0, 1, 2, 3, 4]" class="player">
+                                <div class="champion">
+                                    <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                    <div
+                                        [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
+                                        class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
+                                    {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="kda-items">
-                                <span class="kda" [ngStyle]="{'margin-right': '0'}">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
-                                <div class="item-block">
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
+                                <div class="kda-items">
+                                    <span class="kda" [ngStyle]="{'margin-right': '0'}">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
+                                    <div class="item-block">
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <span class="divider-vertical"></span>
-                    <div class="team">
-                        <div *ngFor="let index of [5, 6, 7, 8, 9]" class="player">
-                            <div class="kda-items">
-                                <div class="item-block">
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
-                                    <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
+                        <span class="divider-vertical"></span>
+                        <div class="team">
+                            <div *ngFor="let index of [5, 6, 7, 8, 9]" class="player">
+                                <div class="kda-items">
+                                    <div class="item-block">
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item0"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item1"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item2"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item3"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item4"></app-item-block>
+                                        <app-item-block class="item-icon" [itemId]="match.info.participants[index].item5"></app-item-block>
+                                    </div>
+                                    <span [ngStyle]="{'margin-left': '0'}" class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
                                 </div>
-                                <span [ngStyle]="{'margin-left': '0'}" class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
-                            </div>
-                            <div class="champion">
-                                <span 
-                                    [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
-                                    class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
-                                    {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
-                                </span>
-                                <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                <div class="champion">
+                                    <span 
+                                        [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
+                                        class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
+                                        {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
+                                    </span>
+                                    <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div *ngIf="match.more" class="more-content">
+                <mat-divider></mat-divider>
+                Tu es cringe frérot
+            </div>
+        </div>
+
+        <div class="more-infos-button" [ngClass]="getStatsOfPlayer(match).win ? 'win-third' : 'loss-third'" (click)="moreInfos(match)">
+            <!-- mat icon arrow down -->
+            <mat-icon *ngIf="!match.more" class="icon">arrow_drop_down</mat-icon>
+            <mat-icon *ngIf="match.more" class="icon">arrow_drop_up</mat-icon>
         </div>
     </div>
 

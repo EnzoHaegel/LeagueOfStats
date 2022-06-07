@@ -44,6 +44,7 @@ export interface IMatchMetadata {
 export interface IMatch {
     metadata: IMatchMetadata;
     info: IInfo;
+    more: boolean;
 }
 
 export interface IInfo {
