@@ -61,7 +61,7 @@
                         justify-content: center;
                         display: flex;
                         flex-direction: column;
-                        margin-right: 10px;
+                        margin-right: 4px;
 
                         .img {
                             display: flex;
@@ -107,8 +107,8 @@
                             justify-content: center;
                             align-items: center;
                             font-size: 14px;
-                            display: flex;
                             color: #ddd;
+                            display: inline-block;
                         }
 
                         .kda-ratio {
@@ -240,7 +240,7 @@
             border-bottom-right-radius: 5px;
             display: flex;
             margin-left: 5px;
-            
+
             cursor: pointer;
 
             &:hover {
@@ -267,7 +267,7 @@
         justify-content: center;
 
         .button {
-            width: 50%;
+            width: 100%;
         }
     }
 }
@@ -365,13 +365,39 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
     .container {
-        .match-history.game {
-            .game-content {
-                .infos {
-                    .items {
-                        display: none;
+        .match-history {
+            .game {
+                .game-content {
+                    .infos {
+                        .all-players {
+                            .team {
+                                .player {
+                                    .champion {
+                                        .player-name {
+                                            width: 32px;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 588px) {
+    .container {
+        .match-history {
+            .game {
+                .game-content {
+                    .infos {
+                        .items {
+                            display: none;
+                        }
                     }
                 }
             }
