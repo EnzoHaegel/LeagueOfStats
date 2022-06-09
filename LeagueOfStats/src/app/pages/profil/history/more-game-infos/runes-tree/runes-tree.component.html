@@ -2,7 +2,6 @@
     <div *ngIf="primary" class="style">
         <div *ngFor="let runes of primary.slots" class="row">
             <div *ngFor="let rune of runes.runes">
-                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
                 <img
                     [openDelay]="150"
                     [ngbPopover]="popContent0"
@@ -13,6 +12,7 @@
                     [ngbPopover]="popContent0"
                     triggers="mouseenter:mouseleave"
                     *ngIf="!isRuneActivated(rune)" class="rune" [src]="runesService.returnRuneIcon(rune)">
+                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
             </div>
         </div>
     </div>
@@ -20,7 +20,6 @@
     <div *ngIf="secondary" class="style">
         <div *ngFor="let runes of secondary.slots; let i = index" class="row" [attr.data-index]="i">
             <div *ngFor="let rune of runes.runes">
-                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
                 <img
                     [openDelay]="150"
                     [ngbPopover]="popContent0"
@@ -31,6 +30,7 @@
                     [ngbPopover]="popContent0"
                     triggers="mouseenter:mouseleave"
                     *ngIf="!isRuneActivated(rune) && i > 0" class="rune" [src]="runesService.returnRuneIcon(rune)">
+                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
             </div>
         </div>
         <div class="row">

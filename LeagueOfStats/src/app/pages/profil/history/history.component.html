@@ -24,7 +24,12 @@
                                 <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner2Id)">
                             </div>
                             <div class="summs">
-                                <img class="summs-icon" [src]="runesService.returnRuneIcon(runesService.getRuneFromId(getStatsOfPlayer(match).perks.styles[0].selections[0].perk))">
+                                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithId(runesService.getRuneFromId(getStatsOfPlayer(match).perks.styles[0].selections[0].perk)!.id)"></app-rune-popover></ng-template>
+                                <img
+                                [openDelay]="150"
+                                [ngbPopover]="popContent0"
+                                triggers="mouseenter:mouseleave"
+                                class="summs-icon" [src]="runesService.returnRuneIcon(runesService.getRuneFromId(getStatsOfPlayer(match).perks.styles[0].selections[0].perk))">
                                 <img class="summs-icon" [src]="runesService.returnTypeIcon(runesService.getTypeFromId(getStatsOfPlayer(match).perks.styles[1].selections[0].perk))">
                             </div>
                         </div>

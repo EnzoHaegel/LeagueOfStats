@@ -19,7 +19,6 @@ export class RunesTreeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.runes);
     this.primary = this.runesService.getTypeFromId(this.runes.styles[0].selections[0].perk);
     this.secondary = this.runesService.getTypeFromId(this.runes.styles[1].selections[0].perk);
   }
