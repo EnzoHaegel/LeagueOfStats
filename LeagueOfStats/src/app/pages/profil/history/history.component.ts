@@ -57,7 +57,7 @@ export class HistoryComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['puuid']) {
         this.matches = [];
-        this.getMatchesId(params['puuid'], 0, 10);
+        this.getMatchesId(params['puuid'], 0, 2);
         this.user_puuid = params['puuid'];
       } else if (params['user']) {
         this.username.setValue(params['user']);

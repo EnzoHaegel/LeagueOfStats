@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="head">
+        <img class="icon" [src]="runeService.getStatsModsIcon(rune.id)">
+        <div class="infos">
+            <div class="name">{{ rune.name }}</div>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="description" [innerHTML]="rune.longDesc"></div>
+</div>

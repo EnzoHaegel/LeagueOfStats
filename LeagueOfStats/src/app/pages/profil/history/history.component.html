@@ -126,7 +126,7 @@
             </div>
             <div *ngIf="match.more" class="more-content">
                 <mat-divider></mat-divider>
-                Tu es cringe frérot
+                <app-runes-tree [runes]="getStatsOfPlayer(match).perks"></app-runes-tree>
             </div>
         </div>
 

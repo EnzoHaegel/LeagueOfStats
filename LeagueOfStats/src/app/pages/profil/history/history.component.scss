@@ -316,14 +316,16 @@
 @media screen and (max-width: 1274px) {
     .container {
         .match-history {
-            .game-content {
-                .infos {
-                    .all-players {
-                        .team {
-                            .player {
-                                .kda-items {
-                                    .item-block {
-                                        display: none;
+            .game {
+                .game-content {
+                    .infos {
+                        .all-players {
+                            .team {
+                                .player {
+                                    .kda-items {
+                                        .item-block {
+                                            display: none;
+                                        }
                                     }
                                 }
                             }
@@ -342,14 +344,16 @@
 @media screen and (max-width: 750px) {
     .container {
         .match-history {
-            .game-content {
-                .infos {
-                    .all-players {
-                        .team {
-                            .player {
-                                .kda-items {
-                                    .kda {
-                                        display: none;
+            .game {
+                .game-content {
+                    .infos {
+                        .all-players {
+                            .team {
+                                .player {
+                                    .kda-items {
+                                        .kda {
+                                            display: none;
+                                        }
                                     }
                                 }
                             }
@@ -363,7 +367,7 @@
 
 @media screen and (max-width: 600px) {
     .container {
-        .match-history {
+        .match-history.game {
             .game-content {
                 .infos {
                     .items {

@@ -28,6 +28,8 @@ import { AdsenseModule } from 'ng2-adsense';
 import { MoreGameInfosComponent } from './pages/profil/history/more-game-infos/more-game-infos.component';
 import { CurrentGameComponent } from './pages/profil/history/current-game/current-game.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { RunesTreeComponent } from './pages/profil/history/more-game-infos/runes-tree/runes-tree.component';
+import { RunePopoverComponent } from './utils/rune-popover/rune-popover.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ItemBlockComponent,
     MoreGameInfosComponent,
     CurrentGameComponent,
+    RunesTreeComponent,
+    RunePopoverComponent,
   ],
   imports: [
     BrowserModule,

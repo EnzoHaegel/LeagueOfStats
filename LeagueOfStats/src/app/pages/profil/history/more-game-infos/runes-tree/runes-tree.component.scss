@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    width: fit-content;
+    margin: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .style {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            .rune {
+                width: 24px;
+                height: 24px;
+                margin: 3px;
+                -webkit-filter: grayscale(90%);
+                filter: grayscale(90%);
+            }
+
+            .rune-activated {
+                width: 24px;
+                height: 24px;
+                margin: 3px;
+                border: 1px solid #e7d10b;
+                border-radius: 100%;
+            }
+
+            .stats-mods {
+                width: 24px;
+                height: 24px;
+                margin: 3px;
+            }
+        }
+    }
+}
+
+.divider {
+    margin: 10px;
+}

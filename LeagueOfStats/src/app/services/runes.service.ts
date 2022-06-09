@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import runes from '../../assets/runes.json';
-import { IRunes, IStyles } from '../models/IRunes';
+import rune from '../../assets/statsmods.json';
+import { IRune, IRunes, IStyles } from '../models/IRunes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RunesService {
 
-  public runes: IStyles[] = runes
+  public runes: IStyles[] = runes;
+
+  public rune: IRune[] = rune;
 
   constructor() { }
 
@@ -47,5 +50,41 @@ export class RunesService {
     if (!rune)
       return '';
     return 'https://ddragon.canisback.com/img/' + rune.icon;
+  }
+
+  public getStatsModsIcon(id: string | number): string {
+    for (let i = 0; i < this.rune.length; i++) {
+      if (this.rune[i].id === id) {
+        return 'https://ddragon.canisback.com/img/' + this.rune[i].iconPath.split('v1/')[1];
+      }
+    }
+    return '';
+  }
+
+  public getDescription(id: string | number): string {
+    for (let i = 0; i < this.rune.length; i++) {
+      if (this.rune[i].id === id) {
+        return this.rune[i].longDesc;
+      }
+    }
+    return '';
+  }
+
+  public getRuneWithRunes(runes: IRunes): IRune {
+    for (let i = 0; i < this.rune.length; i++) {
+      if (this.rune[i].id === runes.id) {
+        return this.rune[i];
+      }
+    }
+    return this.rune[0];
+  }
+
+  public getRuneWithId(id: string | number): IRune {
+    for (let i = 0; i < this.rune.length; i++) {
+      if (this.rune[i].id === id) {
+        return this.rune[i];
+      }
+    }
+    return this.rune[0];
   }
 }

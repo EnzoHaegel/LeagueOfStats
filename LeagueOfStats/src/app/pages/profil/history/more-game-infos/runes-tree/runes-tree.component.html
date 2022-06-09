@@ -1,0 +1,57 @@
+<div class="container">
+    <div *ngIf="primary" class="style">
+        <div *ngFor="let runes of primary.slots" class="row">
+            <div *ngFor="let rune of runes.runes">
+                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
+                <img
+                    [openDelay]="150"
+                    [ngbPopover]="popContent0"
+                    triggers="mouseenter:mouseleave"
+                    *ngIf="isRuneActivated(rune)" class="rune-activated" [src]="runesService.returnRuneIcon(rune)">
+                <img
+                    [openDelay]="150"
+                    [ngbPopover]="popContent0"
+                    triggers="mouseenter:mouseleave"
+                    *ngIf="!isRuneActivated(rune)" class="rune" [src]="runesService.returnRuneIcon(rune)">
+            </div>
+        </div>
+    </div>
+    <mat-divider [vertical]="true" class="divider"></mat-divider>
+    <div *ngIf="secondary" class="style">
+        <div *ngFor="let runes of secondary.slots; let i = index" class="row" [attr.data-index]="i">
+            <div *ngFor="let rune of runes.runes">
+                <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithRunes(rune)"></app-rune-popover></ng-template>
+                <img
+                    [openDelay]="150"
+                    [ngbPopover]="popContent0"
+                    triggers="mouseenter:mouseleave"
+                    *ngIf="isRuneActivated(rune) && i > 0" class="rune-activated" [src]="runesService.returnRuneIcon(rune)">
+                <img
+                    [openDelay]="150"
+                    [ngbPopover]="popContent0"
+                    triggers="mouseenter:mouseleave"
+                    *ngIf="!isRuneActivated(rune) && i > 0" class="rune" [src]="runesService.returnRuneIcon(rune)">
+            </div>
+        </div>
+        <div class="row">
+            <ng-template #popContent0><app-rune-popover [rune]="runesService.getRuneWithId(runes.statPerks.offense)"></app-rune-popover></ng-template>
+            <ng-template #popContent1><app-rune-popover [rune]="runesService.getRuneWithId(runes.statPerks.flex)"></app-rune-popover></ng-template>
+            <ng-template #popContent2><app-rune-popover [rune]="runesService.getRuneWithId(runes.statPerks.defense)"></app-rune-popover></ng-template>
+            <img
+                [openDelay]="150"
+                [ngbPopover]="popContent0"
+                triggers="mouseenter:mouseleave"
+                class="stats-mods" [src]="runesService.getStatsModsIcon(runes.statPerks.offense)">
+            <img
+                [openDelay]="150"
+                [ngbPopover]="popContent1"
+                triggers="mouseenter:mouseleave"
+                class="stats-mods" [src]="runesService.getStatsModsIcon(runes.statPerks.flex)">
+            <img
+                [openDelay]="150"
+                [ngbPopover]="popContent2"
+                triggers="mouseenter:mouseleave"
+                class="stats-mods" [src]="runesService.getStatsModsIcon(runes.statPerks.defense)">
+        </div>
+    </div>
+</div>
