@@ -1,3 +1,7 @@
+export interface IChampions {
+    [key: string]: IChampion;
+}
+
 export interface IChampion {
     version: string;
     id: string;

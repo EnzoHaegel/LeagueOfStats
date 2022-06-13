@@ -1,48 +1,56 @@
 import { Injectable } from '@angular/core';
 import champion from '../../assets/champion.json';
-import { IChampion } from '../models/IChampions';
+import { IChampion, IChampions } from '../models/IChampions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChampionsService {
 
-  public champions: IChampion[] = champion.data;
+  public champions: IChampions = champion.data;
 
   constructor() { }
 
   public getChampionInternalNameById(id: number | string): string {
-    for (let champion of this.champions) {
-      if (champion.key == id.toString()) {
-        return champion.id;
+    for (let key in this.champions) {
+      if (this.champions[key].key === id.toString()) {
+        return this.champions[key].id;
       }
     }
-    return ''
+    return '';
   }
 
   public getChampionRealNameById(id: number | string): string {
-    for (let champion of this.champions) {
-      if (champion.key == id.toString()) {
-        return champion.name;
+    for (let key in this.champions) {
+      if (this.champions[key].key === id.toString()) {
+        return this.champions[key].name;
       }
     }
-    return ''
+    return '';
   }
 
   public getChampionIdByInternalName(name: number | string): string {
-    for (let champion of this.champions) {
-      if (champion.id == name.toString()) {
-        return champion.key;
+    for (let key in this.champions) {
+      if (this.champions[key].id === name.toString()) {
+        return key;
       }
     }
-    return ''
+    return '';
   }
 
   public getChampionJson(): string {
     return JSON.stringify(champion);
   }
 
-  public getChampions(): IChampion[] {
+  public getChampions(): IChampions {
     return this.champions;
+  }
+
+  public mapToChampionArray(): IChampion[] {
+    const champions: IChampion[] = [];
+    for (let key in this.champions) {
+      champions.push(this.champions[key]);
+    }
+    return champions;
   }
 }

@@ -5,6 +5,9 @@
             <mat-tab label="Rankeds"></mat-tab>
         </mat-tab-group>
     </div>
+    <div class="current-game">
+        <app-current-game [summonerName]="summonerName"></app-current-game>
+    </div>
     <div *ngFor="let match of getMatchesRanked()" class="match-history" [ngClass]="getStatsOfPlayer(match).win ? 'win' : 'loss'">
         <div class="color-secondary" [ngClass]="getStatsOfPlayer(match).win ? 'win-secondary' : 'loss-secondary'">
         </div>

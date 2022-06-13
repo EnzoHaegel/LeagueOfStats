@@ -3,6 +3,10 @@
     width: calc(100% - 10px);
     justify-content: space-between;
 
+    .current-game {
+        margin-top: 10px
+    }
+
     .match-history {
         border-radius: 5px;
         background-color: #424242;

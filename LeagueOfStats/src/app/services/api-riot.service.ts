@@ -77,4 +77,10 @@ export class ApiRiotService {
       map((data: any) => data.name)
     );
   }
+
+  public getActiveGameBySummonerId(id: string): Observable<any> {
+    return this.http.get(this.BASE_URL + 'active-games/' + id, { headers: this.headers }).pipe(
+      map((data: any) => this.mapperRiotApiService.mapISpectator(data))
+    );
+  }
 }

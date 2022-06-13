@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IChampion } from 'src/app/models/IChampions';
+import { IChampion, IChampions } from 'src/app/models/IChampions';
 import { ChampionsService } from 'src/app/services/champions.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class ChampionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.champions = this.championsService.getChampions();
+    this.champions = this.championsService.mapToChampionArray();
     this.displayedChampions = this.champions;
   }
 
