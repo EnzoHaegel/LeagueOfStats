@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="search-item">
+        <mat-form-field appearance="fill" class="form-group">
+            <mat-label>Search a item</mat-label>
+            <input
+                (keyup)="onChangeEvent($event)"
+                matInput
+                placeholder="Username"
+                [formControl]="searchedItem"
+                #input
+            >
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <div class="button">
+            <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div class="items">
+        <div *ngFor="let item of displayedItems" class="item-icon">
+            <ng-template #popContent><app-item-popover [item]="item"></app-item-popover></ng-template>
+            <img [openDelay]="150" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" class="icon" [src]="'assets/item/' + item.image.full">
+            <span class="item-name">{{ item.name }}</span>
+        </div>
+    </div>
+</div>

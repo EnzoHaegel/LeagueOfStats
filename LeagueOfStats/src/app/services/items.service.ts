@@ -18,4 +18,12 @@ export class ItemsService {
   public getDescription(id: string | number): string {
     return this.items[id.toString()].description;
   }
+
+  public getIItemArray(): IItem[] {
+    const items: IItem[] = [];
+    for (let key in this.items) {
+      items.push(this.items[key]);
+    }
+    return items;
+  }
 }

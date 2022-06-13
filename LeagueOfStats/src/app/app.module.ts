@@ -31,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { RunesTreeComponent } from './pages/profil/history/more-game-infos/runes-tree/runes-tree.component';
 import { RunePopoverComponent } from './utils/rune-popover/rune-popover.component';
 import { ParticipantComponent } from './pages/profil/history/current-game/participant/participant.component';
+import { ItemsComponent } from './pages/items/items.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ParticipantComponent } from './pages/profil/history/current-game/partic
     RunesTreeComponent,
     RunePopoverComponent,
     ParticipantComponent,
+    ItemsComponent,
   ],
   imports: [
     BrowserModule,
