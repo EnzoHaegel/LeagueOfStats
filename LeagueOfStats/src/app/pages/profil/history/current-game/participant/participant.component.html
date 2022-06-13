@@ -1,0 +1,27 @@
+<div
+    routerLink="/"
+    [queryParams]="{
+        user: spectator.participants[index].summonerName
+    }"
+    class="participant-name"
+    [ngStyle]="spectator.participants[index].summonerId === summonerId ? {'color': '#FFD'} : {'color': '#CCC'}"
+>
+    {{ spectator.participants[index].summonerName }}
+</div>
+<div class="champion">
+    <img [src]="getChampionIconById(spectator.participants[index].championId)" class="picture">
+    <span class="champion-name">{{championsService.getChampionRealNameById(spectator.participants[index].championId)}}</span>
+</div>
+<mat-divider class="divider"></mat-divider>
+<div class="runes">
+    <ng-template #popContentRune><app-rune-popover [rune]="runeService.getRuneWithId(spectator.participants[index].perks.perkIds[0])"></app-rune-popover></ng-template>
+    <img
+        class="picture"
+        [openDelay]="150"
+        [ngbPopover]="popContentRune"
+        triggers="mouseenter:mouseleave"
+        [src]="runeService.returnRuneIconById(spectator.participants[index].perks.perkIds[0])">
+    <img
+        class="picture"
+        [src]="runeService.returnTypeIconById(spectator.participants[index].perks.perkSubStyle)">
+</div>

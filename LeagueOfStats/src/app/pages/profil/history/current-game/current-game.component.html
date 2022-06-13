@@ -15,40 +15,10 @@
         {{ timestampToMinSeconds(this.date - spectator.gameStartTime) }}
     </div>
     <div class="team">
-        <div *ngFor="let index of [0, 1, 2, 3, 4]" class="participant">
-            <div
-                routerLink="/"
-                [queryParams]="{
-                    user: spectator.participants[index].summonerName
-                }"
-                class="participant-name"
-                [ngStyle]="spectator.participants[index].summonerId === summonerId ? {'color': '#FFD'} : {'color': '#CCC'}"
-            >
-                {{ spectator.participants[index].summonerName }}
-            </div>
-            <div class="champion">
-                <img [src]="getChampionIconById(spectator.participants[index].championId)" class="picture">
-                <span>{{championsService.getChampionRealNameById(spectator.participants[index].championId)}}</span>
-            </div>
-        </div>
+        <app-participant *ngFor="let index of [0, 1, 2, 3, 4]" class="participant" [spectator]="spectator" [index]="index" [summonerId]="summonerId"></app-participant>
     </div>
     <mat-divider></mat-divider>
     <div class="team">
-        <div *ngFor="let index of [5, 6, 7, 8, 9]" class="participant">
-            <div
-                routerLink="/"
-                [queryParams]="{
-                    user: spectator.participants[index].summonerName
-                }"
-                class="participant-name"
-                [ngStyle]="spectator.participants[index].summonerId === summonerId ? {'color': '#FFD'} : {'color': '#CCC'}"
-            >
-                {{ spectator.participants[index].summonerName }}
-            </div>
-            <div class="champion">
-                <img [src]="getChampionIconById(spectator.participants[index].championId)" class="picture">
-                <span>{{championsService.getChampionRealNameById(spectator.participants[index].championId)}}</span>
-            </div>
-        </div>
+        <app-participant *ngFor="let index of [5, 6, 7, 8, 9]" class="participant" [spectator]="spectator" [index]="index" [summonerId]="summonerId"></app-participant>
     </div>
 </div>

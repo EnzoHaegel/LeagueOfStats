@@ -40,10 +40,27 @@ export class RunesService {
     return undefined;
   }
 
+  public getStyleFromStyleId(id: string | number): IStyles {
+    for (let i = 0; i < this.runes.length; i++) {
+      if (this.runes[i].id === id) {
+        return this.runes[i];
+      }
+    }
+    return this.runes[0];
+  }
+
   public returnRuneIcon(rune: IRunes | undefined): string {
     if (!rune)
       return '';
     return 'https://ddragon.canisback.com/img/' + rune.icon;
+  }
+
+  public returnRuneIconById(id: string | number): string {
+    return this.returnRuneIcon(this.getRuneFromId(id));
+  }
+
+  public returnTypeIconById(id: string | number): string {
+    return this.returnTypeIcon(this.getStyleFromStyleId(id));
   }
 
   public returnTypeIcon(rune: IStyles | undefined): string {

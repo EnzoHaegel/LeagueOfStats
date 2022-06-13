@@ -1,0 +1,44 @@
+.participant-name {
+    color: #ddd;
+    cursor: pointer;
+    margin-bottom: 5px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.champion {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .picture {
+        width: 32px;
+        height: 32px;
+        margin-right: 5px;
+        border-radius: 100%;
+    }
+
+    .champion-name {
+        font-size: 15px;
+        color: #ddd;
+    }
+}
+
+.divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.runes {
+    display: flex;
+    flex-direction: column;
+
+    .picture {
+        width: 32px;
+        height: 32px;
+        margin-right: 5px;
+        border-radius: 100%;
+    }
+}

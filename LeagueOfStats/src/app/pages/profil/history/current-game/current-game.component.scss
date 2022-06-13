@@ -4,52 +4,26 @@
 }
 
 .container {
-    margin: auto;
-    width: fit-content;
-    margin-top: 10px;
+    width: calc(100% - 20px);
+    margin: 10px;
 
     .team {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
         flex-wrap: wrap;
         overflow-wrap: break-word;
+        justify-content: center;
 
         .participant {
             margin: 5px;
             background-color: #424242;
             padding: 5px;
-            width: 150px;
-
-            .participant-name {
-                color: #ddd;
-                cursor: pointer;
-                margin-bottom: 5px;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .champion {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-
-                .picture {
-                    width: 32px;
-                    height: 32px;
-                    margin-right: 5px;
-                    border-radius: 100%;
-                }
-
-                .champion-name {
-                    font-size: 15px;
-                    color: #ddd;
-                }
-            }
+            width: calc(100% / 5 - 20px);
+            min-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
         }
     }
 }

@@ -185,7 +185,6 @@ export class HistoryComponent implements OnInit {
 
   public getMatchesRanked(): IMatch[] {
     if (this.onlyRankeds) {
-      console.log(this.matches)
       return this.matches.filter(match => match.info.gameMode === "CLASSIC" && match.info.gameType === "MATCHED_GAME");
     } else {
       return this.matches;

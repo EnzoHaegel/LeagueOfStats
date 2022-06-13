@@ -49,7 +49,6 @@ export class CurrentGameComponent implements OnInit {
           .getActiveGameBySummonerId(summoner.id)
           .subscribe((spectator: ISpectator) => {
             this.spectator = spectator;
-            console.log(spectator);
           });
       });
     }
@@ -57,10 +56,6 @@ export class CurrentGameComponent implements OnInit {
 
   public isSpectatorRoute(): boolean {
     return this.router.url.includes('spectator');
-  }
-
-  public getChampionIconById(championId: number): any {
-    return 'assets/champion/' + this.championsService.getChampionInternalNameById(championId) + '.png';
   }
 
   public timestampToMinSeconds(timestamp: number): string {
