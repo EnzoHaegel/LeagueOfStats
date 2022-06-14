@@ -85,8 +85,15 @@
                         <div class="team">
                             <div *ngFor="let index of [0, 1, 2, 3, 4]" class="player">
                                 <div class="champion">
-                                    <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                    <img 
+                                        class="champion-icon"
+                                        matTooltipPosition="above"
+                                        [matTooltip]="championsService.getChampionInternalNameById(match.info.participants[index].championId)"
+                                        [src]="getChampionIconById(match.info.participants[index].championId)"
+                                    >
                                     <div
+                                        matTooltipPosition="above"
+                                        [matTooltip]="match.info.participants[index].summonerName"
                                         [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
                                         class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
                                     {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
@@ -120,12 +127,19 @@
                                     <span [ngStyle]="{'margin-left': '0'}" class="kda">{{ match.info.participants[index].kills }} / {{ match.info.participants[index].deaths }} / {{ match.info.participants[index].assists }}</span>
                                 </div>
                                 <div class="champion">
-                                    <span 
+                                    <span
+                                        matTooltipPosition="above"
+                                        [matTooltip]="match.info.participants[index].summonerName"
                                         [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
                                         class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
                                         {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
                                     </span>
-                                    <img class="champion-icon" [src]="getChampionIconById(match.info.participants[index].championId)" alt="">
+                                    <img 
+                                        class="champion-icon"
+                                        matTooltipPosition="above"
+                                        [matTooltip]="championsService.getChampionInternalNameById(match.info.participants[index].championId)"
+                                        [src]="getChampionIconById(match.info.participants[index].championId)"
+                                    >
                                 </div>
                             </div>
                         </div>

@@ -20,7 +20,7 @@
                             <div *ngIf="isSmurf()" class="smurf">
                                 <!-- Warn Icon-->
                                 <mat-icon class="icon" [ngStyle]="{'font-size': '12px'}">warning</mat-icon>
-                                <span>Smurf</span>
+                                <span class="smurf-text">Smurf</span>
                             </div>
                             <span [ngStyle]="{'font-size': '16px'}">{{ 'Lvl: ' + summoner?.summonerLevel }}</span>
                             <span>{{ summoner?.name }}</span>
