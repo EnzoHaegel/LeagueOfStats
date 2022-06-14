@@ -107,6 +107,7 @@ export interface IParticipant {
     championLevel: number;
     combatPlayerScore: number;
     deaths: number;
+    individualPosition: string;
     doubleKills: number;
     firstBloodAssist: boolean;
     firstBloodKill: boolean;

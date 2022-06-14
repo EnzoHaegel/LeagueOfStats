@@ -103,6 +103,7 @@ export class MapperRiotApiService {
       goldEarned: participant.goldEarned,
       goldSpent: participant.goldSpent,
       inhibitorKills: participant.inhibitorKills,
+      individualPosition: participant.individualPosition,
       item0: participant.item0,
       item1: participant.item1,
       item2: participant.item2,
