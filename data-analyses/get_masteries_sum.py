@@ -29,7 +29,7 @@ def get_file_content(file_name):
     Get the content of a file.
     """
     content = ''
-    with open(file_name, 'r') as file:
+    with open(file_name, 'r', encoding="cp437") as file:
         try:
             content = file.read()
         except:
