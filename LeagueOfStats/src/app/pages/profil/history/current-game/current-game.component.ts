@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ISpectator } from 'src/app/models/ISpectator';
 import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
-import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 
 @Component({
   selector: 'app-current-game',
@@ -23,7 +22,6 @@ export class CurrentGameComponent implements OnInit {
     private apiRiotService: ApiRiotService,
     public router: Router,
     private route: ActivatedRoute,
-    private riotPicturesService: RiotPicturesService,
     public championsService: ChampionsService,
   ) {
       setInterval(() => {
