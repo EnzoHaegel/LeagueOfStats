@@ -26,7 +26,7 @@
                                 <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner1Id)">
                                 <img class="summs-icon" [src]="'assets/summoner/' + summonersService.getPictureByKey(getStatsOfPlayer(match).summoner2Id)">
                             </div>
-                            <div class="summs">
+                            <div class="summs higher-index">
                                 <ng-template #popContentRune><app-rune-popover [rune]="runesService.getRuneWithId(runesService.getRuneFromId(getStatsOfPlayer(match).perks.styles[0].selections[0].perk)!.id)"></app-rune-popover></ng-template>
                                 <img
                                     [openDelay]="150"
@@ -42,7 +42,7 @@
                         <span class="kda-text">{{ getStatsOfPlayer(match).kills }} / {{ getStatsOfPlayer(match).deaths }} / {{ getStatsOfPlayer(match).assists }}</span>
                         <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
                     </div>
-                    <div class="items">
+                    <div class="items higher-index">
                         <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
                         <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
                         <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>

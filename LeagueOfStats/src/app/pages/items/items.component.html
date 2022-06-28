@@ -18,7 +18,7 @@
     <mat-divider class="divider"></mat-divider>
     <div class="items">
         <div *ngFor="let item of displayedItems" class="item-icon">
-            <ng-template #popContent><app-item-popover [item]="item"></app-item-popover></ng-template>
+            <ng-template #popContent class="higher-index"><app-item-popover [item]="item"></app-item-popover></ng-template>
             <img [openDelay]="150" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" class="icon" [src]="'assets/item/' + item.image.full">
             <span class="item-name">{{ item.name }}</span>
         </div>

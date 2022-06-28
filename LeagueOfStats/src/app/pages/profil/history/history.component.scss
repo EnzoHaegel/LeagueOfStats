@@ -345,6 +345,10 @@
     }
 }
 
+.higher-index {
+    z-index: 11100;
+}
+
 @media screen and (max-width: 750px) {
     .container {
         .match-history {
