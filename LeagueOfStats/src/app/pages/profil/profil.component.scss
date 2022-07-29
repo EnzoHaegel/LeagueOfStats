@@ -173,7 +173,7 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
     .container {
         .infos {
             flex-direction: column;
@@ -198,8 +198,8 @@
             }
 
             .history {
-                width: calc(100% - 5px);
-                max-width: calc(100% - 5px);
+                width: 100%;
+                max-width: 100%;
                 margin-left: 5px;
             }
         }

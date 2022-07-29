@@ -96,8 +96,6 @@
                                         [src]="getChampionIconById(match.info.participants[index].championId)"
                                     >
                                     <div
-                                        matTooltipPosition="above"
-                                        [matTooltip]="match.info.participants[index].summonerName"
                                         [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
                                         class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
                                     {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
@@ -132,8 +130,6 @@
                                 </div>
                                 <div class="champion">
                                     <span
-                                        matTooltipPosition="above"
-                                        [matTooltip]="match.info.participants[index].summonerName"
                                         [ngStyle]="championsService.getChampionRealNameById(getStatsOfPlayer(match).championId) === championsService.getChampionRealNameById(match.info.participants[index].championId) ? {'color': '#FFD'} : {'color': '#CCC'}"
                                         class="player-name" routerLink="/" [queryParams]="{user: match.info.participants[index].summonerName}">
                                         {{ match.info.participants[index].summonerName || championsService.getChampionRealNameById(match.info.participants[index].championId) }}
