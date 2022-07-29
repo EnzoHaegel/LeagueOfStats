@@ -43,42 +43,46 @@
                         <span class="kda-ratio">{{ calcKda(getStatsOfPlayer(match)) + ' kda' }}</span> 
                     </div>
                     <div class="items higher-index">
-                        <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
-                        <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
-                        <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>
-                        <ng-template #popContent3><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item3)"></app-item-popover></ng-template>
-                        <ng-template #popContent4><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item4)"></app-item-popover></ng-template>
-                        <ng-template #popContent5><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item5)"></app-item-popover></ng-template>
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent0"
-                            triggers="mouseenter:mouseleave"
-                            *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'">
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent1"
-                            triggers="mouseenter:mouseleave"
-                            *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'">
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent2"
-                            triggers="mouseenter:mouseleave"
+                        <div class="item-row-1">
+                            <ng-template #popContent0><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item0)"></app-item-popover></ng-template>
+                            <ng-template #popContent1><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item1)"></app-item-popover></ng-template>
+                            <ng-template #popContent2><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item2)"></app-item-popover></ng-template>
+                            <img [openDelay]="150"
+                                [ngbPopover]="popContent0"
+                                triggers="mouseenter:mouseleave"
+                                *ngIf="getStatsOfPlayer(match).item0 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item0 + '.png'">
+                            <img [openDelay]="150"
+                                [ngbPopover]="popContent1"
+                                triggers="mouseenter:mouseleave"
+                                *ngIf="getStatsOfPlayer(match).item1 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item1 + '.png'">
+                            <img [openDelay]="150"
+                                [ngbPopover]="popContent2"
+                                triggers="mouseenter:mouseleave"
                             *ngIf="getStatsOfPlayer(match).item2 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item2 + '.png'">
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent3"
-                            triggers="mouseenter:mouseleave"
-                            *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'">
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent4"
-                            triggers="mouseenter:mouseleave"
-                            *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'">
-                        <img [openDelay]="150"
-                            [ngbPopover]="popContent5"
-                            triggers="mouseenter:mouseleave"
-                            *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'">
-                        <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
-                        <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
-                        <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
-                        <span *ngIf="getStatsOfPlayer(match).item3 == 0" class="item-icon"></span>
-                        <span *ngIf="getStatsOfPlayer(match).item4 == 0" class="item-icon"></span>
-                        <span *ngIf="getStatsOfPlayer(match).item5 == 0" class="item-icon"></span>
+                                <span *ngIf="getStatsOfPlayer(match).item0 == 0" class="item-icon"></span>
+                                <span *ngIf="getStatsOfPlayer(match).item1 == 0" class="item-icon"></span>
+                                <span *ngIf="getStatsOfPlayer(match).item2 == 0" class="item-icon"></span>
+                            </div>
+                            <div class="item-row-2">
+                                <ng-template #popContent3><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item3)"></app-item-popover></ng-template>
+                                <ng-template #popContent4><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item4)"></app-item-popover></ng-template>
+                                <ng-template #popContent5><app-item-popover [item]="itemsService.getItem(getStatsOfPlayer(match).item5)"></app-item-popover></ng-template>
+                                <img [openDelay]="150"
+                                [ngbPopover]="popContent3"
+                                triggers="mouseenter:mouseleave"
+                                *ngIf="getStatsOfPlayer(match).item3 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item3 + '.png'">
+                            <img [openDelay]="150"
+                                [ngbPopover]="popContent4"
+                                triggers="mouseenter:mouseleave"
+                                *ngIf="getStatsOfPlayer(match).item4 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item4 + '.png'">
+                            <img [openDelay]="150"
+                                [ngbPopover]="popContent5"
+                                triggers="mouseenter:mouseleave"
+                                *ngIf="getStatsOfPlayer(match).item5 > 0" class="item-icon" [src]="'assets/item/' + getStatsOfPlayer(match).item5 + '.png'">
+                            <span *ngIf="getStatsOfPlayer(match).item3 == 0" class="item-icon"></span>
+                            <span *ngIf="getStatsOfPlayer(match).item4 == 0" class="item-icon"></span>
+                            <span *ngIf="getStatsOfPlayer(match).item5 == 0" class="item-icon"></span>
+                        </div>
                     </div>
 
                     <div class="all-players">
@@ -148,7 +152,7 @@
             </div>
             <div *ngIf="match.more" class="more-content">
                 <mat-divider></mat-divider>
-                <app-runes-tree [runes]="getStatsOfPlayer(match).perks"></app-runes-tree>
+                <app-more-game-infos [runes]="getStatsOfPlayer(match).perks"></app-more-game-infos>
             </div>
         </div>
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-f8ed3fe6-2ec3-45b9-ba01-76a8501609c8"
+const API_KEY = "RGAPI-aeadf427-c838-482f-a958-2e6a71864af4"
 const fs = require('fs');
 
 function saveResponsesInDirectory(req, body, next) {

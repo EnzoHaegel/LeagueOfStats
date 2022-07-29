@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IPerks } from 'src/app/models/IRiot';
 
 @Component({
   selector: 'app-more-game-infos',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./more-game-infos.component.scss']
 })
 export class MoreGameInfosComponent implements OnInit {
+  @Input() runes!: IPerks;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

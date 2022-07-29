@@ -126,22 +126,53 @@
 
                     .items {
                         display: flex;
+                        flex-direction: column;
                         margin-left: 5px;
                         overflow: auto;
                         justify-content: center;
                         align-items: center;
 
-                        .item-icon {
+                        .item-row-1 {
+                            display: flex;
+                            margin-left: 5px;
+                            overflow: auto;
                             justify-content: center;
-                            width: 24px;
-                            height: 24px;
-                            background-color: rgba(0, 0, 0, 0.2);
-                            margin: 1px;
-                            border-radius: 5px;
-                            cursor: help;
+                            align-items: center;
 
-                            &:hover {
-                                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+                            .item-icon {
+                                justify-content: center;
+                                width: 24px;
+                                height: 24px;
+                                background-color: rgba(0, 0, 0, 0.2);
+                                margin: 1px;
+                                border-radius: 5px;
+                                cursor: help;
+    
+                                &:hover {
+                                    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+                                }
+                            }
+                        }
+                        
+                        .item-row-2 {
+                            display: flex;
+                            margin-left: 5px;
+                            overflow: auto;
+                            justify-content: center;
+                            align-items: center;
+
+                            .item-icon {
+                                justify-content: center;
+                                width: 24px;
+                                height: 24px;
+                                background-color: rgba(0, 0, 0, 0.2);
+                                margin: 1px;
+                                border-radius: 5px;
+                                cursor: help;
+    
+                                &:hover {
+                                    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+                                }
                             }
                         }
                     }
@@ -397,7 +428,7 @@
     }
 }
 
-@media screen and (max-width: 588px) {
+@media screen and (max-width: 500px) {
     .container {
         .match-history {
             .game {
