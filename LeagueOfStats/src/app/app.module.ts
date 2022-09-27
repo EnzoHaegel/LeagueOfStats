@@ -32,6 +32,7 @@ import { RunesTreeComponent } from './pages/profil/history/more-game-infos/runes
 import { RunePopoverComponent } from './utils/rune-popover/rune-popover.component';
 import { ParticipantComponent } from './pages/profil/history/current-game/participant/participant.component';
 import { ItemsComponent } from './pages/items/items.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ItemsComponent } from './pages/items/items.component';
     CommonModule,
     NgbModule,
     AdsenseModule.forRoot(),
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

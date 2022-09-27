@@ -7,6 +7,11 @@ import { ApiRiotService } from 'src/app/services/api-riot.service';
 import { ChampionsService } from 'src/app/services/champions.service';
 import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 
+interface Region {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -14,6 +19,21 @@ import { RiotPicturesService } from 'src/app/services/riot-pictures.service';
 })
 export class ProfilComponent implements OnInit {
   @Input() inputUsername: string | undefined;
+
+  public regionList: Region[] = [
+    {value: 'euw', viewValue: 'EUW'},
+    {value: 'na', viewValue: 'NA'},
+    {value: 'kr', viewValue: 'KR'},
+    {value: 'eun', viewValue: 'EUN'},
+    {value: 'br', viewValue: 'BR'},
+    {value: 'oc', viewValue: 'OC'},
+    {value: 'la', viewValue: 'LA'},
+    {value: 'tr', viewValue: 'TR'},
+    {value: 'jp', viewValue: 'JP'},
+    {value: 'ru', viewValue: 'RU'},
+  ]
+
+  public selectedRegion: string = "";
 
   public banner!: Banner;
 
@@ -54,10 +74,12 @@ export class ProfilComponent implements OnInit {
         this.onSearch();
       }
     });
+    this.selectedRegion = localStorage.getItem("region") ? localStorage.getItem("region")! : 'euw';
   }
 
   public onSearch(): void {
     localStorage.setItem("username", this.username.value);
+    localStorage.setItem("region", this.selectedRegion);
     this.resetProfile();
     this.router.navigate(['/'], { queryParams: { user: this.username.value } }).then(() => {
       window.location.reload();

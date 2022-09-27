@@ -5,6 +5,14 @@
             <input matInput placeholder="Username" [formControl]="username" #input>
             <mat-icon matSuffix>account_circle</mat-icon>
         </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Region</mat-label>
+            <mat-select [(ngModel)]="selectedRegion" name="region">
+                <mat-option *ngFor="let region of regionList" [value]="region.value">
+                    {{region.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <div class="button">
             <button (click)="onSearch()" mat-raised-button color="primary" type="submit">Submit</button>
         </div>
