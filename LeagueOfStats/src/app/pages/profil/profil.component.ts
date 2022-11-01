@@ -55,8 +55,12 @@ export class ProfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
+      if (params['region']) {
+        this.selectedRegion = params['region'];
+        localStorage.setItem("region", params['region']);
+      }
       if (params['user'] && params['user'] !== '') {
-        this.getSummonerByName(params['user']);
+        this.getSummonerByName(params['user'], this.selectedRegion ?? "euw");
         this.resetProfile();
       } else if (params['puuid']) {
         this.getSummonerByPuuid(params['puuid']);
@@ -81,7 +85,7 @@ export class ProfilComponent implements OnInit {
     localStorage.setItem("username", this.username.value);
     localStorage.setItem("region", this.selectedRegion);
     this.resetProfile();
-    this.router.navigate(['/'], { queryParams: { user: this.username.value } }).then(() => {
+    this.router.navigate(['/'], { queryParams: { user: this.username.value, region: this.selectedRegion } }).then(() => {
       window.location.reload();
     });
   }
@@ -93,8 +97,8 @@ export class ProfilComponent implements OnInit {
     this.masteries = undefined;
   }
 
-  public getSummonerByName(username: string): void {
-    this.apiRiotService.getSummonerByName(username).subscribe(data => {
+  public getSummonerByName(username: string, region: string): void {
+    this.apiRiotService.getSummonerByName(username, region).subscribe(data => {
       this.summoner = data;
       this.getLeagueById();
       this.getMasteriesById();

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-2c0f140a-2b93-4193-9cde-28a3d0acff19"
+const API_KEY = "RGAPI-ea8ab385-b1d6-45a2-8a16-e99a66d0c5eb"
 const fs = require('fs');
 
 function saveResponsesInDirectory(req, body, next) {
@@ -35,6 +35,7 @@ function checkIfResponsesExist(req, res, next) {
     if (req.headers.origin != 'http://localhost:4200') {
         next();
     }
+    next();
     let path = req.originalUrl;
     let fileName = path.split("/api/")[1];
     let filePath = "./responses/" + fileName + ".json";
@@ -92,6 +93,7 @@ router.get('/', checkLocalhost, checkIfResponsesExist, (req, res) => {
 router.get('/summoner/:summonerName', checkLocalhost, checkIfResponsesExist, (req, res) => {
     const summonerName = req.params.summonerName;
     const region = getRegionFromQuery(req);
+    console.log('\nRequesting...' + summonerName + ' ' + region + '\n');
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
     https.get(url, (response) => {
         let body = '';

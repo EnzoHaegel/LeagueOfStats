@@ -33,6 +33,7 @@ import { SummonersService } from 'src/app/services/summoners.service';
 })
 export class HistoryComponent implements OnInit {
   @Input() inputUsername: string | undefined;
+  @Input() region: string | undefined
 
   public matches: IMatch[] = [];
 
@@ -97,7 +98,7 @@ export class HistoryComponent implements OnInit {
     // save username in local storage
     localStorage.setItem("username", this.username.value);
     
-    this.apiRiotService.getSummonerByName(this.username.value).subscribe(data => {
+    this.apiRiotService.getSummonerByName(this.username.value, this.region ?? '').subscribe(data => {
       this.getMatchesId(data.puuid, 0, 10);
       this.user_puuid = data.puuid;
     });

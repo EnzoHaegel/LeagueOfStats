@@ -11,6 +11,7 @@ import { ChampionsService } from 'src/app/services/champions.service';
 })
 export class CurrentGameComponent implements OnInit {
   @Input() summonerName!: string;
+  @Input() region: string | undefined;
 
   public summonerId!: string;
 
@@ -41,7 +42,7 @@ export class CurrentGameComponent implements OnInit {
       }
     });
     if (!this.summonerId) {
-      this.apiRiotService.getSummonerByName(this.summonerName).subscribe(summoner => {
+      this.apiRiotService.getSummonerByName(this.summonerName, this.region ?? '').subscribe(summoner => {
         this.summonerId = summoner.id;
         this.apiRiotService
           .getActiveGameBySummonerId(summoner.id)

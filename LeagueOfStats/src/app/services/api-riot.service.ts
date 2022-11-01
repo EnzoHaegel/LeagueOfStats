@@ -22,9 +22,9 @@ export class ApiRiotService {
     private mapperRiotApiService: MapperRiotApiService
   ) { }
 
-  public getSummonerByName(name: string): Observable<ISummoner> {
+  public getSummonerByName(name: string, region: string): Observable<ISummoner> {
     return this.http.get(this.BASE_URL + 'summoner/' + name, { headers: this.headers }).pipe(
-      map(data => this.mapperRiotApiService.mapSummoner(data))
+      map((data: any) => this.mapperRiotApiService.mapSummoner(data))
     );
   }
 
