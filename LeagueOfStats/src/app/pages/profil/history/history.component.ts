@@ -99,7 +99,7 @@ export class HistoryComponent implements OnInit {
     localStorage.setItem("username", this.username.value);
     
     this.apiRiotService.getSummonerByName(this.username.value, this.region ?? '').subscribe(data => {
-      this.getMatchesId(data.puuid, 0, 10);
+      this.getMatchesId(data.puuid, 0, 20);
       this.user_puuid = data.puuid;
     });
   }
@@ -130,7 +130,7 @@ export class HistoryComponent implements OnInit {
   }
 
   public loadMore(): void {
-    this.getMatchesId(this.user_puuid, this.matches.length, 10);
+    this.getMatchesId(this.user_puuid, this.matches.length, 20);
   }
 
   public secondesToMinutes(secondes: number): string {

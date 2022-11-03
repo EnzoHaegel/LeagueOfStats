@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-ea8ab385-b1d6-45a2-8a16-e99a66d0c5eb"
+const API_KEY = "RGAPI-320dd992-71d6-44f0-b59b-f69ddfd51338"
 const fs = require('fs');
 
 function saveResponsesInDirectory(req, body, next) {
@@ -12,7 +12,6 @@ function saveResponsesInDirectory(req, body, next) {
     if (!fs.existsSync('./responses')) {
         fs.mkdirSync('./responses');
     }
-    // create all directories and subdirectory of filName if they don't exist
     let directories = fileName.split("/");
     let currentPath = "./responses";
     for (let i = 0; i < directories.length - 1; i++) {
@@ -21,8 +20,8 @@ function saveResponsesInDirectory(req, body, next) {
         }
         currentPath += "/" + directories[i];
     }
-    let filePath = "./responses/" + fileName + ".json";
     let json = JSON.stringify(response);
+    let filePath = "./responses/" + fileName + ".json";
     fs.writeFile(filePath, json, function (err) {
         if (err) {
             console.log(err);
@@ -35,7 +34,6 @@ function checkIfResponsesExist(req, res, next) {
     if (req.headers.origin != 'http://localhost:4200') {
         next();
     }
-    next();
     let path = req.originalUrl;
     let fileName = path.split("/api/")[1];
     let filePath = "./responses/" + fileName + ".json";
@@ -57,6 +55,7 @@ function checkLocalhost (req, res, next) {
 
 function getRegionFromQuery(req) {
     const region = req.query.region;
+    console.log(region);
     switch (region) {
         case 'br':
             return 'br1';
@@ -85,14 +84,14 @@ function getRegionFromQuery(req) {
     }
 }
 
-router.get('/', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/', checkLocalhost, (req, res) => {
     res.status(200).json({ message: 'API works' });
 });
 
 // https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/
-router.get('/summoner/:summonerName', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/summoner/:summonerName', checkLocalhost, (req, res) => {
     const summonerName = req.params.summonerName;
-    const region = getRegionFromQuery(req);
+    const region = 'euw1';
     console.log('\nRequesting...' + summonerName + ' ' + region + '\n');
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
     https.get(url, (response) => {
@@ -110,7 +109,7 @@ router.get('/summoner/:summonerName', checkLocalhost, checkIfResponsesExist, (re
 });
 
 // get summoner by summoner puuid
-router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, (req, res) => {
     const summonerPuuid = req.params.summonerPuuid;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${summonerPuuid}?api_key=${API_KEY}`;
@@ -129,7 +128,7 @@ router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, checkIfResponsesExi
 });
 
 // https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/
-router.get('/league/:summonerId', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/league/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${API_KEY}`;
@@ -148,7 +147,7 @@ router.get('/league/:summonerId', checkLocalhost, checkIfResponsesExist, (req, r
 });
 
 // https://${region}.api.riotgames.com/lol/match/v5/matches/by-puuid/
-router.get('/matches/:summonerId', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/matches/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     // get start and count from query params
     const start = req.query.start;
@@ -168,7 +167,7 @@ router.get('/matches/:summonerId', checkLocalhost, checkIfResponsesExist, (req, 
 });
 
 // https://${region}.api.riotgames.com/lol/match/v5/matches/
-router.get('/match/:matchId', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/match/:matchId', checkLocalhost, (req, res) => {
     const matchId = req.params.matchId;
     const url = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${API_KEY}`;
     https.get(url, (response) => {
@@ -186,7 +185,7 @@ router.get('/match/:matchId', checkLocalhost, checkIfResponsesExist, (req, res) 
 });
 
 // http://ddragon.leagueoflegends.com/cdn/' + version + '/data/fr_FR/champion.json
-router.get('/championName/:id', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/championName/:id', checkLocalhost, (req, res) => {
     const id = req.params.id;
     const region = getRegionFromQuery(req);
     const url = `http://ddragon.leagueoflegends.com/cdn/12.6.1/data/fr_FR/champion.json`;
@@ -206,7 +205,7 @@ router.get('/championName/:id', checkLocalhost, checkIfResponsesExist, (req, res
     });
 });
 
-router.get('/allChampionName', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/allChampionName', checkLocalhost, (req, res) => {
     const url = `http://ddragon.leagueoflegends.com/cdn/12.6.1/data/fr_FR/champion.json`;
     https.get(url, (response) => {
         let body = '';
@@ -224,7 +223,7 @@ router.get('/allChampionName', checkLocalhost, checkIfResponsesExist, (req, res)
 });
 
 // get rank player info depend of username
-router.get('/rank/:summonerName', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/rank/:summonerName', checkLocalhost, (req, res) => {
     const summonerName = req.params.summonerName;
     // get encryptedSummonerId from summonerName
     const region = getRegionFromQuery(req);
@@ -256,7 +255,7 @@ router.get('/rank/:summonerName', checkLocalhost, checkIfResponsesExist, (req, r
 });
 
 // https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/
-router.get('/masteries/:summonerId', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/masteries/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}?api_key=${API_KEY}`;
@@ -275,7 +274,7 @@ router.get('/masteries/:summonerId', checkLocalhost, checkIfResponsesExist, (req
 });
 
 // https://${region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/Os_pok6009bWwaD2SMmBT1DoASK7F_w8jXeS-5-6YpZgZbY
-router.get('/active-games/:summonerId', checkLocalhost, checkIfResponsesExist, (req, res) => {
+router.get('/active-games/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerId}?api_key=${API_KEY}`;
