@@ -27,10 +27,16 @@ export class ProfilComponent implements OnInit {
     {value: 'eun', viewValue: 'EUN'},
     {value: 'br', viewValue: 'BR'},
     {value: 'oc', viewValue: 'OC'},
-    {value: 'la', viewValue: 'LA'},
+    {value: 'la1', viewValue: 'LA1'},
+    {value: 'la2', viewValue: 'LA2'},
     {value: 'tr', viewValue: 'TR'},
     {value: 'jp', viewValue: 'JP'},
     {value: 'ru', viewValue: 'RU'},
+    {value: 'tw', viewValue: 'TW'},
+    {value: 'vn', viewValue: 'VN'},
+    {value: 'th', viewValue: 'TH'},
+    {value: 'ph', viewValue: 'PH'},
+    {value: 'sg', viewValue: 'SG'},
   ]
 
   public selectedRegion: string = "";
@@ -54,13 +60,10 @@ export class ProfilComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.selectedRegion = localStorage.getItem("region") ? localStorage.getItem("region")! : 'euw';
     this.route.queryParams.subscribe(params => {
-      if (params['region']) {
-        this.selectedRegion = params['region'];
-        localStorage.setItem("region", params['region']);
-      }
       if (params['user'] && params['user'] !== '') {
-        this.getSummonerByName(params['user'], this.selectedRegion ?? "euw");
+        this.getSummonerByName(params['user'], this.selectedRegion);
         this.resetProfile();
       } else if (params['puuid']) {
         this.getSummonerByPuuid(params['puuid']);
@@ -78,27 +81,30 @@ export class ProfilComponent implements OnInit {
         this.onSearch();
       }
     });
-    this.selectedRegion = localStorage.getItem("region") ? localStorage.getItem("region")! : 'euw';
+    localStorage.setItem("region", this.selectedRegion);
+    localStorage.setItem("username", this.username.value);
   }
 
   public onSearch(): void {
-    localStorage.setItem("username", this.username.value);
-    localStorage.setItem("region", this.selectedRegion);
     this.resetProfile();
-    this.router.navigate(['/'], { queryParams: { user: this.username.value, region: this.selectedRegion } }).then(() => {
+    localStorage.setItem("region", this.selectedRegion);
+    localStorage.setItem("username", this.username.value);
+    this.router.navigate(['/'], { queryParams: { user: this.username.value} }).then(() => {
       window.location.reload();
     });
   }
 
   public resetProfile(): void {
+    this.selectedRegion = localStorage.getItem("region") ? localStorage.getItem("region")! : 'euw';
     localStorage.clear();
     this.summoner = undefined;
     this.league = undefined;
     this.masteries = undefined;
+    localStorage.setItem("region", this.selectedRegion);
   }
 
   public getSummonerByName(username: string, region: string): void {
-    this.apiRiotService.getSummonerByName(username, region).subscribe(data => {
+    this.apiRiotService.postSummonerByName(username, region).subscribe(data => {
       this.summoner = data;
       this.getLeagueById();
       this.getMasteriesById();
@@ -193,5 +199,10 @@ export class ProfilComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  public onRegionSelected(): void {
+    localStorage.setItem("region", this.selectedRegion);
+    this.onSearch();
   }
 }

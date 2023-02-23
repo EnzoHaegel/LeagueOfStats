@@ -42,7 +42,7 @@ export class CurrentGameComponent implements OnInit {
       }
     });
     if (!this.summonerId) {
-      this.apiRiotService.getSummonerByName(this.summonerName, this.region ?? '').subscribe(summoner => {
+      this.apiRiotService.postSummonerByName(this.summonerName, this.region ?? '').subscribe(summoner => {
         this.summonerId = summoner.id;
         this.apiRiotService
           .getActiveGameBySummonerId(summoner.id)

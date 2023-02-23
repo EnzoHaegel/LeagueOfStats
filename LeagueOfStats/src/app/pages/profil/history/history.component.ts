@@ -98,7 +98,7 @@ export class HistoryComponent implements OnInit {
     // save username in local storage
     localStorage.setItem("username", this.username.value);
     
-    this.apiRiotService.getSummonerByName(this.username.value, this.region ?? '').subscribe(data => {
+    this.apiRiotService.postSummonerByName(this.username.value, this.region ?? '').subscribe(data => {
       this.getMatchesId(data.puuid, 0, 20);
       this.user_puuid = data.puuid;
     });

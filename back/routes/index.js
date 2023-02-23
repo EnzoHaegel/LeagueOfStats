@@ -2,31 +2,31 @@ const express = require('express');
 const router = express.Router();
 const https = require('https');
 const http = require('http');
-const API_KEY = "RGAPI-320dd992-71d6-44f0-b59b-f69ddfd51338"
+const API_KEY = "RGAPI-8808cb6c-c278-4ba1-b752-fee5ebcaf1fe"
 const fs = require('fs');
 
 function saveResponsesInDirectory(req, body, next) {
-    let path = req.originalUrl;
-    let response = body;
-    let fileName = path.split("/api/")[1];
-    if (!fs.existsSync('./responses')) {
-        fs.mkdirSync('./responses');
-    }
-    let directories = fileName.split("/");
-    let currentPath = "./responses";
-    for (let i = 0; i < directories.length - 1; i++) {
-        if (!fs.existsSync(currentPath + "/" + directories[i])) {
-            fs.mkdirSync(currentPath + "/" + directories[i]);
-        }
-        currentPath += "/" + directories[i];
-    }
-    let json = JSON.stringify(response);
-    let filePath = "./responses/" + fileName + ".json";
-    fs.writeFile(filePath, json, function (err) {
-        if (err) {
-            console.log(err);
-        }
-    });
+    // let path = req.originalUrl;
+    // let response = body;
+    // let fileName = path.split("/api/")[1];
+    // if (!fs.existsSync('./responses')) {
+    //     fs.mkdirSync('./responses');
+    // }
+    // let directories = fileName.split("/");
+    // let currentPath = "./responses";
+    // for (let i = 0; i < directories.length - 1; i++) {
+    //     if (!fs.existsSync(currentPath + "/" + directories[i])) {
+    //         fs.mkdirSync(currentPath + "/" + directories[i]);
+    //     }
+    //     currentPath += "/" + directories[i];
+    // }
+    // let json = JSON.stringify(response);
+    // let filePath = "./responses/" + fileName + ".json";
+    // fs.writeFile(filePath, json, function (err) {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    // });
     next();
 }
 
@@ -54,8 +54,7 @@ function checkLocalhost (req, res, next) {
 }
 
 function getRegionFromQuery(req) {
-    const region = req.query.region;
-    console.log(region);
+    const region = req.body.region;
     switch (region) {
         case 'br':
             return 'br1';
@@ -79,8 +78,59 @@ function getRegionFromQuery(req) {
             return 'tr1';
         case 'ru':
             return 'ru';
+        case 'tw':
+            return 'tw2';
+        case 'vn':
+            return 'vn2';
+        case 'sg':
+            return 'sg2';
+        case 'ph':
+            return 'ph2';
+        case 'th':
+            return 'th2';
         default:
             return 'euw1';
+    }
+}
+
+function getContinentFromRegion(req) {
+    const region = req.body.region;
+    console.log(region);
+    switch (region) {
+        case 'br':
+            return 'americas';
+        case 'eun':
+            return 'europe';
+        case 'euw':
+            return 'europe';
+        case 'jp':
+            return 'asia';
+        case 'kr':
+            return 'asia';
+        case 'la':
+            return 'americas';
+        case 'la2':
+            return 'americas';
+        case 'na':
+            return 'americas';
+        case 'oc':
+            return 'americas';
+        case 'tr':
+            return 'europe';
+        case 'ru':
+            return 'europe';
+        case 'tw':
+            return 'sea';
+        case 'vn':
+            return 'sea';
+        case 'sg':
+            return 'sea';
+        case 'ph':
+            return 'sea';
+        case 'th':
+            return 'sea';
+        default:
+            return 'europe';
     }
 }
 
@@ -91,7 +141,27 @@ router.get('/', checkLocalhost, (req, res) => {
 // https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/
 router.get('/summoner/:summonerName', checkLocalhost, (req, res) => {
     const summonerName = req.params.summonerName;
-    const region = 'euw1';
+    const region = getRegionFromQuery(req);
+    console.log('\nRequesting...' + summonerName + ' ' + region + '\n');
+    const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
+    https.get(url, (response) => {
+        let body = '';
+        response.on('data', (chunk) => {
+            body += chunk;
+        });
+        response.on('end', () => {
+            const parsed = JSON.parse(body);
+            saveResponsesInDirectory(req, parsed, () => {
+                res.status(200).json(parsed);
+            });
+        });
+    });
+});
+
+// post summoner by name and region
+router.post('/summoner/:summonerName', checkLocalhost, (req, res) => {
+    const summonerName = req.params.summonerName;
+    const region = getRegionFromQuery(req);
     console.log('\nRequesting...' + summonerName + ' ' + region + '\n');
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${API_KEY}`;
     https.get(url, (response) => {
@@ -109,7 +179,7 @@ router.get('/summoner/:summonerName', checkLocalhost, (req, res) => {
 });
 
 // get summoner by summoner puuid
-router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, (req, res) => {
+router.post('/summoner/puuid/:summonerPuuid', checkLocalhost, (req, res) => {
     const summonerPuuid = req.params.summonerPuuid;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${summonerPuuid}?api_key=${API_KEY}`;
@@ -128,7 +198,7 @@ router.get('/summoner/puuid/:summonerPuuid', checkLocalhost, (req, res) => {
 });
 
 // https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/
-router.get('/league/:summonerId', checkLocalhost, (req, res) => {
+router.post('/league/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${API_KEY}`;
@@ -147,12 +217,13 @@ router.get('/league/:summonerId', checkLocalhost, (req, res) => {
 });
 
 // https://${region}.api.riotgames.com/lol/match/v5/matches/by-puuid/
-router.get('/matches/:summonerId', checkLocalhost, (req, res) => {
+router.post('/matches/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     // get start and count from query params
     const start = req.query.start;
     const count = req.query.count;
-    let url = `https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerId}/ids?api_key=${API_KEY}`;
+    const region = getContinentFromRegion(req);
+    let url = `https://${region}.api.riotgames.com/lol/match/v5/matches/by-puuid/${summonerId}/ids?api_key=${API_KEY}`;
     url += `&start=${start}&count=${count}`;
     https.get(url, (response) => {
         let body = '';
@@ -167,9 +238,10 @@ router.get('/matches/:summonerId', checkLocalhost, (req, res) => {
 });
 
 // https://${region}.api.riotgames.com/lol/match/v5/matches/
-router.get('/match/:matchId', checkLocalhost, (req, res) => {
+router.post('/match/:matchId', checkLocalhost, (req, res) => {
     const matchId = req.params.matchId;
-    const url = `https://europe.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${API_KEY}`;
+    const region = getContinentFromRegion(req);
+    const url = `https://${region}.api.riotgames.com/lol/match/v5/matches/${matchId}?api_key=${API_KEY}`;
     https.get(url, (response) => {
         let body = '';
         response.on('data', (chunk) => {
@@ -185,9 +257,8 @@ router.get('/match/:matchId', checkLocalhost, (req, res) => {
 });
 
 // http://ddragon.leagueoflegends.com/cdn/' + version + '/data/fr_FR/champion.json
-router.get('/championName/:id', checkLocalhost, (req, res) => {
+router.post('/championName/:id', checkLocalhost, (req, res) => {
     const id = req.params.id;
-    const region = getRegionFromQuery(req);
     const url = `http://ddragon.leagueoflegends.com/cdn/12.6.1/data/fr_FR/champion.json`;
     http.get(url, (response) => {
         let body = '';
@@ -205,7 +276,7 @@ router.get('/championName/:id', checkLocalhost, (req, res) => {
     });
 });
 
-router.get('/allChampionName', checkLocalhost, (req, res) => {
+router.post('/allChampionName', checkLocalhost, (req, res) => {
     const url = `http://ddragon.leagueoflegends.com/cdn/12.6.1/data/fr_FR/champion.json`;
     https.get(url, (response) => {
         let body = '';
@@ -223,7 +294,7 @@ router.get('/allChampionName', checkLocalhost, (req, res) => {
 });
 
 // get rank player info depend of username
-router.get('/rank/:summonerName', checkLocalhost, (req, res) => {
+router.post('/rank/:summonerName', checkLocalhost, (req, res) => {
     const summonerName = req.params.summonerName;
     // get encryptedSummonerId from summonerName
     const region = getRegionFromQuery(req);
@@ -255,7 +326,7 @@ router.get('/rank/:summonerName', checkLocalhost, (req, res) => {
 });
 
 // https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/
-router.get('/masteries/:summonerId', checkLocalhost, (req, res) => {
+router.post('/masteries/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}?api_key=${API_KEY}`;
@@ -274,7 +345,7 @@ router.get('/masteries/:summonerId', checkLocalhost, (req, res) => {
 });
 
 // https://${region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/Os_pok6009bWwaD2SMmBT1DoASK7F_w8jXeS-5-6YpZgZbY
-router.get('/active-games/:summonerId', checkLocalhost, (req, res) => {
+router.post('/active-games/:summonerId', checkLocalhost, (req, res) => {
     const summonerId = req.params.summonerId;
     const region = getRegionFromQuery(req);
     const url = `https://${region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerId}?api_key=${API_KEY}`;
